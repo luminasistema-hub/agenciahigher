@@ -1,0 +1,241 @@
+/* ============================================================
+   HIGHER CRM — FINANCIAL MODULE CSS
+   ============================================================ */
+
+/* ── FINANCIAL NAV ITEM ──────────────────────────────────── */
+#nav-financial.active { background: rgba(34,197,94,0.1); }
+#nav-financial.active::before { background: #22C55E; }
+#nav-financial:hover .nav-icon { animation: icon-heartbeat 0.6s ease forwards; }
+#nav-financial.active .nav-icon { filter: drop-shadow(0 0 4px rgba(34,197,94,0.7)); animation: glow-pulse 2.5s ease-in-out infinite; }
+
+/* ── FINANCIAL STAT CARDS ────────────────────────────────── */
+#stat-received .stat-icon  { animation: icon-bounce    2.8s ease-in-out infinite; display:inline-block; }
+#stat-pending  .stat-icon  { animation: icon-wiggle    3s   ease-in-out infinite; display:inline-block; }
+#stat-overdue  .stat-icon  { animation: icon-heartbeat 1.5s ease-in-out infinite; display:inline-block; }
+#stat-mrr      .stat-icon  { animation: icon-float     3.2s ease-in-out infinite; display:inline-block; }
+
+#stat-received:hover { border-color: rgba(34,197,94,0.4);   box-shadow: 0 0 18px rgba(34,197,94,0.12); }
+#stat-pending:hover  { border-color: rgba(245,158,11,0.4);  box-shadow: 0 0 18px rgba(245,158,11,0.12); }
+#stat-overdue:hover  { border-color: rgba(239,68,68,0.4);   box-shadow: 0 0 18px rgba(239,68,68,0.12); }
+#stat-mrr:hover      { border-color: rgba(252, 81, 48, 0.4);  box-shadow: 0 0 18px rgba(252, 81, 48, 0.12); }
+
+.financial-container {
+  display: flex; flex-direction: column; gap: 2rem;
+  padding: 0.5rem;
+}
+
+.fin-toolbar {
+  display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;
+}
+
+/* ── INVOICE TABLE BADGES ────────────────────────────────── */
+.badge-draft    { background: rgba(107,95,136,.15); color: #a89ec0; border: 1px solid rgba(107,95,136,.25); }
+.badge-sent     { background: rgba(59,130,246,.12);  color: #60a5fa; border: 1px solid rgba(59,130,246,.2); }
+.badge-partial  { background: rgba(245,158,11,.12);  color: #fbbf24; border: 1px solid rgba(245,158,11,.2); }
+.badge-paid     { background: rgba(34,197,94,.12);   color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
+.badge-overdue  { background: rgba(239,68,68,.12);   color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+.badge-cancelled{ background: rgba(107,95,136,.12);  color: #6B5F88; border: 1px solid rgba(107,95,136,.2); }
+
+/* ── AMOUNT DISPLAY ──────────────────────────────────────── */
+.amount-display {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 700; font-size: 0.95rem; color: var(--text-1);
+}
+.amount-display.green  { color: #4ade80; }
+.amount-display.yellow { color: #fbbf24; }
+.amount-display.red    { color: #f87171; }
+.amount-display.muted  { color: var(--text-3); }
+
+/* ── INVOICE MODAL ITEMS ─────────────────────────────────── */
+.invoice-items-table {
+  width: 100%; border-collapse: collapse;
+  margin-top: 0.75rem; font-size: 0.83rem;
+}
+.invoice-items-table th {
+  background: var(--bg-3); padding: 0.5rem 0.75rem;
+  text-align: left; font-size: 0.72rem; font-weight: 600;
+  color: var(--text-3); text-transform: uppercase; letter-spacing: .05em;
+  border-radius: 4px;
+}
+.invoice-items-table td { padding: 0.5rem 0.5rem; vertical-align: top; }
+.invoice-items-table tbody tr { border-bottom: 1px dashed rgba(255,255,255,.05); }
+
+.item-row-input {
+  background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-1); padding: 0.6rem 0.6rem; border-radius: 6px;
+  font-size: 0.83rem; outline: none; width: 100%;
+  transition: all .2s;
+}
+.item-row-input:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.2); }
+.item-row-input:focus { border-color: var(--brand-orange); background: rgba(252, 81, 48, 0.05); box-shadow: 0 0 0 2px rgba(252, 81, 48, 0.2); }
+.item-row-input[type="number"] { text-align: right; }
+
+.item-row-total { font-weight: 700; color: var(--brand-orange); text-align: right; padding-top: 0.8rem !important; }
+.remove-item-btn {
+  background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.2); color: #f87171;
+  font-size: 0.9rem; cursor: pointer; padding: 0.4rem 0.6rem; margin-top: 0.2rem;
+  transition: all .2s; border-radius: 6px;
+}
+.remove-item-btn:hover { color: #fff; background: #ef4444; }
+
+.add-item-btn {
+  background: rgba(252, 81, 48, 0.05); border: 1px dashed rgba(252, 81, 48, 0.4);
+  color: var(--brand-orange); font-size: 0.85rem; font-weight: 600;
+  padding: 0.8rem 1rem; border-radius: 8px;
+  cursor: pointer; width: 100%; margin-top: 0.75rem;
+  transition: .2s;
+}
+.add-item-btn:hover { border-style: solid; background: var(--brand-orange); color: #fff; }
+
+/* Invoice totals in modal */
+.invoice-totals {
+  margin-top: 1rem; border-top: 1px solid var(--border);
+  padding-top: 0.75rem; display: flex; flex-direction: column;
+  gap: 0.4rem; align-items: flex-end;
+}
+.invoice-total-row {
+  display: flex; gap: 1.5rem;
+  font-size: 0.83rem; color: var(--text-2);
+}
+.invoice-total-row.grand {
+  font-size: 1rem; font-weight: 700; color: var(--text-1);
+  border-top: 1px solid var(--border); padding-top: 0.5rem; margin-top: 0.25rem;
+}
+.invoice-total-label { color: var(--text-3); }
+.invoice-total-value { font-weight: 600; min-width: 100px; text-align: right; }
+
+/* ── PAYMENT REGISTRATION SECTION ────────────────────────── */
+.payment-section {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem; margin-top: 1rem;
+}
+.payment-section h4 {
+  font-size: 0.85rem; font-weight: 600; color: #4ade80;
+  margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem;
+}
+.payment-history-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,.04);
+  font-size: 0.8rem;
+}
+.payment-history-item:last-child { border-bottom: none; }
+.payment-history-amount { font-weight: 700; color: #4ade80; }
+.payment-history-meta { color: var(--text-3); font-size: 0.72rem; }
+
+/* ── INVOICE PREVIEW (print) ─────────────────────────────── */
+.invoice-preview {
+  background: #fff; color: #111;
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.invoice-preview-header {
+  background: linear-gradient(135deg, #050401, #151413);
+  color: #fff; padding: 1.5rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.inv-preview-logo {
+  display: flex; align-items: center; gap: 0.6rem;
+  font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1.3rem;
+}
+.inv-preview-logo-icon {
+  width: 32px; height: 32px; border-radius: 8px;
+  background: linear-gradient(135deg, #FC5130, #D13A1D);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 0.85rem;
+}
+.inv-preview-number { font-size: 0.9rem; color: rgba(255,255,255,.6); }
+.invoice-preview-body { padding: 1.5rem 2rem; background: #fff; }
+.inv-preview-parties {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.inv-party-label { font-size: 0.7rem; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: .05em; margin-bottom: .35rem; }
+.inv-party-name { font-weight: 700; color: #111; font-size: 0.95rem; }
+.inv-party-info { font-size: 0.8rem; color: #555; line-height: 1.6; }
+.inv-preview-table { width: 100%; border-collapse: collapse; margin-bottom: 1.25rem; font-size: 0.85rem; }
+.inv-preview-table th { background: #f3f4f6; padding: 0.6rem 0.75rem; text-align: left; font-size: 0.72rem; color: #666; text-transform: uppercase; letter-spacing: .04em; }
+.inv-preview-table td { padding: 0.65rem 0.75rem; border-bottom: 1px solid #f0f0f0; }
+.inv-preview-table .text-right { text-align: right; }
+.inv-preview-total-section { display: flex; justify-content: flex-end; }
+.inv-preview-totals { min-width: 240px; }
+.inv-preview-total-row { display: flex; justify-content: space-between; padding: 0.35rem 0; font-size: 0.85rem; color: #555; }
+.inv-preview-total-row.grand { border-top: 2px solid #111; margin-top: 0.35rem; padding-top: 0.5rem; font-weight: 800; font-size: 1rem; color: #111; }
+.inv-preview-payment { margin-top: 1.5rem; padding: 1rem; background: #f9fafb; border-radius: 8px; }
+.inv-preview-payment-title { font-size: 0.78rem; font-weight: 700; color: #555; margin-bottom: .5rem; text-transform: uppercase; letter-spacing: .04em; }
+.inv-preview-notes { margin-top: 1rem; font-size: 0.8rem; color: #777; line-height: 1.6; }
+.inv-preview-footer { background: #f3f4f6; padding: 0.75rem 2rem; text-align: center; font-size: 0.72rem; color: #999; }
+
+/* ── FINANCIAL CHARTS PLACEHOLDER ───────────────────────── */
+.fin-chart-wrap {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 1.25rem;
+}
+.fin-chart-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.fin-chart-header h3 { font-size: 0.9rem; font-weight: 600; }
+
+/* Mini bar chart */
+.mini-bar-chart {
+  display: flex; align-items: flex-end; gap: 0.5rem;
+  height: 80px;
+}
+.mini-bar {
+  flex: 1; border-radius: 4px 4px 0 0; min-width: 8px;
+  background: var(--grad-brand); opacity: 0.7;
+  transition: opacity .2s;
+  position: relative;
+}
+.mini-bar:hover { opacity: 1; }
+.mini-bar-label {
+  font-size: 0.6rem; color: var(--text-3);
+  text-align: center; margin-top: 0.3rem;
+}
+.mini-bar-chart-wrap { flex: 1; }
+
+/* Overdue warning banner */
+.overdue-banner {
+  background: rgba(239,68,68,0.08);
+  border: 1px solid rgba(239,68,68,0.25);
+  border-radius: var(--radius-sm);
+  padding: 0.85rem 1.1rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  font-size: 0.85rem; cursor: pointer;
+  transition: .2s;
+}
+.overdue-banner:hover { background: rgba(239,68,68,0.12); }
+.overdue-banner-icon { font-size: 1.2rem; animation: icon-heartbeat 1.5s ease-in-out infinite; }
+.overdue-banner-text { flex: 1; }
+.overdue-banner-count { font-weight: 700; color: #f87171; }
+.overdue-banner-link { color: #f87171; font-size: 0.8rem; font-weight: 600; }
+
+/* Due date cell colors */
+.due-overdue { color: #f87171; font-weight: 600; }
+.due-soon    { color: #fbbf24; font-weight: 500; }
+.due-ok      { color: var(--text-3); }
+
+/* Invoice detail panel */
+.invoice-detail-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+}
+.invoice-detail-number {
+  font-family: 'Outfit', sans-serif; font-size: 1.25rem; font-weight: 800;
+}
+.invoice-detail-meta { display: flex; flex-direction: column; gap: 0.35rem; }
+
+/* Print styles */
+@media print {
+  .admin-app { display: none !important; }
+  .modal-overlay { position: static !important; background: none !important; }
+  .invoice-preview { box-shadow: none; border-radius: 0; }
+  .no-print { display: none !important; }
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .inv-preview-parties { grid-template-columns: 1fr; }
+}

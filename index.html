@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Higher — Design Estratégico & Engenharia Digital</title>
+    
+    <!-- SEO -->
+    <meta name="description" content="A Agência Higher é especialista em Design Estratégico, Engenharia Digital e Automação de Alta Performance. Criamos ecossistemas digitais que escalam seu negócio.">
+    <meta name="keywords" content="agência digital, design estratégico, engenharia digital, automação whatsapp, crm, escala digital, criação de sites, svelte, supabase">
+    <link rel="canonical" href="https://agenciahigher.com.br">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Higher — Design Estratégico & Engenharia Digital">
+    <meta property="og:description" content="A engenharia por trás do seu crescimento digital. Sistemas inteligentes e design premium.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agenciahigher.com.br">
+    <meta property="og:image" content="https://agenciahigher.com.br/hero_bg.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Agência Higher",
+      "description": "Design Estratégico e Engenharia Digital de Alta Performance",
+      "url": "https://agenciahigher.com.br",
+      "logo": "https://agenciahigher.com.br/hero_bg.png",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Brasil",
+        "addressRegion": "BR"
+      },
+      "sameAs": [
+        "https://instagram.com/agenciahigher"
+      ]
+    }
+    </script>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-mark">H</div>
+                <span class="logo-text">Higher</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#solucao">Solução</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#cases">Cases</a></li>
+                <li><a href="quiz.html" class="nav-cta">DIAGNÓSTICO GRÁTIS</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="mobile-toggle">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:2000; flex-direction:column; align-items:center; justify-content:center; gap:2rem;">
+        <button id="close-mobile" style="position:absolute; top:2rem; right:2rem; background:none; border:none; color:white; font-size:2rem;">✕</button>
+        <a href="#solucao" style="color:white; font-size:1.5rem; text-decoration:none;" onclick="closeMobileMenu()">Solução</a>
+        <a href="#servicos" style="color:white; font-size:1.5rem; text-decoration:none;" onclick="closeMobileMenu()">Serviços</a>
+        <a href="#cases" style="color:white; font-size:1.5rem; text-decoration:none;" onclick="closeMobileMenu()">Cases</a>
+        <a href="quiz.html" class="nav-cta" onclick="closeMobileMenu()">DIAGNÓSTICO GRÁTIS</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-grid"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge"><span style="width:8px; height:8px; background:var(--accent); border-radius:50%; display:inline-block; margin-right:8px; box-shadow:0 0 10px var(--accent)"></span> Sua máquina de vendas começa aqui</div>
+                <h1 class="hero-title">
+                    A Engenharia por trás do seu <span class="highlight">Crescimento Digital</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Sistemas inteligentes, design estratégico e automação de alta performance para quem busca escala real.
+                </p>
+                <div class="hero-buttons">
+                    <a href="quiz.html" class="btn btn-primary">
+                        Fazer Diagnóstico Gratuito →
+                    </a>
+                    <a href="#servicos" class="btn btn-secondary">Ver Nossos Serviços</a>
+                </div>
+            </div>
+            
+            <!-- THE MISSING DETAIL: Floating Metrics & Styled Image -->
+            <div class="hero-visual" style="position: relative; display: flex; align-items: center; justify-content: center;">
+                <div style="position: relative; width: 100%; max-width: 500px;">
+                    <img src="https://images.unsplash.com/photo-1639322537228-f710d846310a?w=800&q=80" alt="Higher Engineering" style="width: 100%; border-radius: 32px; border: 1px solid var(--border); box-shadow: 0 40px 80px rgba(0,0,0,0.6); filter: brightness(0.8);">
+                    
+                    <!-- Floating Cards -->
+                    <div style="position: absolute; top: -30px; right: -20px; background: rgba(26,26,26,0.9); padding: 1.2rem; border-radius: 20px; border: 1px solid var(--border); backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); min-width: 140px;">
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Conversão</div>
+                        <div class="stat-number" data-target="147" data-prefix="+" data-suffix="%" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--accent);">0%</div>
+                    </div>
+                    
+                    <div style="position: absolute; bottom: 40px; left: -30px; background: rgba(26,26,26,0.9); padding: 1.2rem; border-radius: 20px; border: 1px solid var(--border); backdrop-filter: blur(10px); box-shadow: 0 20px 40px rgba(0,0,0,0.5); min-width: 140px;">
+                        <div style="font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px;">Leads/Mês</div>
+                        <div class="stat-number" data-target="2.4" data-suffix="k" style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: #ff8a65;">0k</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problems Section -->
+    <section class="section problems" id="solucao">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">O Cenário Atual</span>
+                <h2 class="section-title">Por que seu negócio ainda não escala?</h2>
+                <p class="section-subtitle">A verdade é que muitos empreendedores estão presos em processos manuais e sites que não convertem.</p>
+            </div>
+            <div class="problems-grid">
+                <div class="problem-card animate-on-scroll">
+                    <div class="problem-icon">📱</div>
+                    <h3>Dependência do Instagram</h3>
+                    <p>Sem um terreno próprio (seu site), você está à mercê de algoritmos e bloqueios inesperados.</p>
+                </div>
+                <div class="problem-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="problem-icon">📉</div>
+                    <h3>Desorganização de Leads</h3>
+                    <p>Sem um CRM ou automação, você perde o rastro de quem tem potencial real de compra.</p>
+                </div>
+                <div class="problem-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="problem-icon">⏰</div>
+                    <h3>Atendimento Lento</h3>
+                    <p>Se o seu cliente demora mais de 5 minutos para ser respondido, você já perdeu a venda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions Section -->
+    <section class="section solutions">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">A Solução Higher</span>
+                <h2 class="section-title">Nós construímos o Motor do Sucesso</h2>
+                <p class="section-subtitle">Unimos design premium com tecnologia de ponta para automatizar sua captação e conversão de clientes.</p>
+            </div>
+            <div class="solutions-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 2rem;">
+                <!-- Card 1 -->
+                <div class="solution-card animate-on-scroll">
+                    <div class="solution-icon" style="background: rgba(255, 87, 34, 0.1); color: var(--accent); border: 1px solid rgba(255, 87, 34, 0.2);">✓</div>
+                    <div class="solution-content">
+                        <h3>Design que Gera Autoridade Imediata</h3>
+                        <p>Primeiras impressões importam. Criamos interfaces que transmitem confiança e profissionalismo, convertendo visitantes em clientes.</p>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="solution-card animate-on-scroll" style="transition-delay: 0.1s">
+                    <div class="solution-icon" style="background: rgba(255, 87, 34, 0.1); color: var(--accent); border: 1px solid rgba(255, 87, 34, 0.2);">🤖</div>
+                    <div class="solution-content">
+                        <h3>Automação de WhatsApp 24/7</h3>
+                        <p>Atendimento instantâneo, qualificado e automatizado. Seus leads recebem respostas imediatas, mesmo enquanto você dorme.</p>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="solution-card animate-on-scroll" style="transition-delay: 0.2s">
+                    <div class="solution-icon" style="background: rgba(255, 87, 34, 0.1); color: var(--accent); border: 1px solid rgba(255, 87, 34, 0.2);">📈</div>
+                    <div class="solution-content">
+                        <h3>Funil de Vendas de Alta Performance</h3>
+                        <p>Estrutura otimizada para converter. Cada etapa do funil é testada e refinada para maximizar seu retorno sobre investimento.</p>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="solution-card animate-on-scroll" style="transition-delay: 0.3s">
+                    <div class="solution-icon" style="background: rgba(255, 87, 34, 0.1); color: var(--accent); border: 1px solid rgba(255, 87, 34, 0.2);">⚡</div>
+                    <div class="solution-content">
+                        <h3>Estrutura Escalável para Grandes Fluxos</h3>
+                        <p>Arquitetura cloud-native que cresce com seu negócio. Sem travamentos, sem limites, sem dor de cabeça técnica.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section services" id="servicos">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">O Que Fazemos</span>
+                <h2 class="section-title">Projetos sob medida para o seu negócio</h2>
+                <p class="section-subtitle">Não vendemos planos. Entendemos o seu desafio e construímos a solução certa — do briefing ao deploy.</p>
+            </div>
+            <div class="services-grid">
+
+                <!-- Serviço 1 -->
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon-wrap">
+                        <span class="service-icon">🌐</span>
+                    </div>
+                    <div class="service-tag">Design & Presença Digital</div>
+                    <h3 class="service-name">Sites, Landing Pages & Identidade Visual</h3>
+                    <p class="service-desc">Do zero ao ar em dias. Criamos sites institucionais, landing pages de alta conversão e identidades visuais que transmitem autoridade e geram clientes.</p>
+                    <ul class="service-list">
+                        <li>✦ Sites Institucionais & Portfólios</li>
+                        <li>✦ Landing Pages para Campanhas</li>
+                        <li>✦ Identidade Visual & Branding</li>
+                        <li>✦ SEO Técnico e On-Page</li>
+                    </ul>
+                    <a href="quiz.html" class="service-cta">Iniciar Diagnóstico <span>→</span></a>
+                </div>
+
+                <!-- Serviço 2 -->
+                <div class="service-card featured animate-on-scroll">
+                    <div class="service-featured-badge">MAIS SOLICITADO</div>
+                    <div class="service-icon-wrap">
+                        <span class="service-icon">🎯</span>
+                    </div>
+                    <div class="service-tag">Crescimento & Aquisição</div>
+                    <h3 class="service-name">Funis de Venda, CRM & Automação</h3>
+                    <p class="service-desc">Estruturamos a jornada completa do seu cliente: captação, nutrição automática e fechamento. Do primeiro clique ao contrato assinado.</p>
+                    <ul class="service-list">
+                        <li>✦ Funis de Vendas de Alta Conversão</li>
+                        <li>✦ Automação de WhatsApp com IA</li>
+                        <li>✦ CRM e Pipeline de Negócios</li>
+                        <li>✦ E-mails Automáticos e Chatbots</li>
+                    </ul>
+                    <a href="quiz.html" class="service-cta service-cta-featured">Iniciar Diagnóstico <span>→</span></a>
+                </div>
+
+                <!-- Serviço 3 -->
+                <div class="service-card animate-on-scroll">
+                    <div class="service-icon-wrap">
+                        <span class="service-icon">⚙️</span>
+                    </div>
+                    <div class="service-tag">Tecnologia & Sistemas</div>
+                    <h3 class="service-name">Sistemas Web, Apps & Plataformas</h3>
+                    <p class="service-desc">Quando o seu negócio precisa de mais do que um site. Desenvolvemos plataformas, sistemas de gestão, apps mobile e integrações sob medida.</p>
+                    <ul class="service-list">
+                        <li>✦ Sistemas Web & Painéis Administrativos</li>
+                        <li>✦ Aplicativos Mobile (iOS & Android)</li>
+                        <li>✦ Integrações de APIs e ERPs</li>
+                        <li>✦ SaaS & Plataformas Escaláveis</li>
+                    </ul>
+                    <a href="quiz.html" class="service-cta">Iniciar Diagnóstico <span>→</span></a>
+                </div>
+
+            </div>
+
+            <!-- Quiz CTA Banner -->
+            <div class="services-quiz-banner animate-on-scroll">
+                <div class="sqb-left">
+                    <p class="sqb-label">NÃO SABE POR ONDE COMEÇAR?</p>
+                    <h3 class="sqb-title">Faça o diagnóstico gratuito e descubra qual projeto é ideal para você</h3>
+                    <p class="sqb-sub">São 5 perguntas. Em menos de 60 segundos você recebe a recomendação certa para o seu negócio.</p>
+                </div>
+                <a href="quiz.html" class="btn btn-primary sqb-btn">Fazer Diagnóstico Agora →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases Section -->
+    <section class="section cases" id="cases">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-label">Cases</span>
+                <h2 class="section-title">Resultados que Falam por Si</h2>
+            </div>
+            <div class="cases-grid">
+                <a href="https://www.descomplicandooukulele.com.br/" target="_blank" class="case-card animate-on-scroll">
+                    <img src="portfolio_ukulele.png" alt="Case Ukulele" class="case-image">
+                    <div class="case-overlay">
+                        <span class="case-tag">Infoproduto</span>
+                        <h3 class="case-title">Ukulele do Zero</h3>
+                        <p class="case-result">Landing Page de Alta Conversão</p>
+                    </div>
+                </a>
+                <div class="case-card animate-on-scroll">
+                    <img src="portfolio_restaurant.png" alt="Case Restaurante" class="case-image">
+                    <div class="case-overlay">
+                        <span class="case-tag">Gastronomia</span>
+                        <h3 class="case-title">Sabor Divino</h3>
+                        <p class="case-result">+43% em Pedidos Online</p>
+                    </div>
+                </div>
+                <a href="https://www.luminasistema.com.br/" target="_blank" class="case-card animate-on-scroll">
+                    <img src="portfolio_lumina.png" alt="Lumina Sistema" class="case-image">
+                    <div class="case-overlay">
+                        <span class="case-tag">SaaS / Gestão</span>
+                        <h3 class="case-title">Lumina Sistema</h3>
+                        <p class="case-result">Ecossistema para Igrejas</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contato">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="contact-info animate-on-scroll">
+                    <span class="section-label">Consultoria</span>
+                    <h2>Vamos desenhar sua estratégia?</h2>
+                    <p>Receba um diagnóstico completo do seu posicionamento digital.</p>
+                    <a href="https://wa.me/5563984861923" class="btn btn-primary" style="background:#25D366">
+                        ABRIR WHATSAPP
+                    </a>
+                </div>
+                <div class="contact-form animate-on-scroll">
+                    <form id="contact-form">
+                        <div class="form-group"><label>Nome</label><input type="text" id="contact-name" placeholder="Seu nome" required></div>
+                        <div class="form-group"><label>E-mail</label><input type="email" id="contact-email" placeholder="seu@email.com" required></div>
+                        <div class="form-group"><label>WhatsApp</label><input type="tel" id="contact-phone" placeholder="(00) 00000-0000"></div>
+                        <div class="form-group"><label>Mensagem</label><textarea id="contact-message" placeholder="Como podemos ajudar?" required></textarea></div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;" id="contact-submit-btn">ENVIAR MENSAGEM</button>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="form-success" style="display:none; text-align:center; padding: 2rem; background: rgba(34, 197, 94, 0.1); border: 1px solid var(--success); border-radius: 24px;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">🚀</div>
+                        <h3 style="margin-bottom: 0.5rem;">Mensagem Enviada!</h3>
+                        <p style="color: var(--text-secondary);">Obrigado pelo contato. Nosso time entrará em contato em breve.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-mark">H</div>
+                        <span class="logo-text">Higher</span>
+                    </a>
+                    <p style="margin-top: 1.5rem; color: var(--text-secondary); line-height: 1.7;">
+                        A engenharia por trás do seu crescimento. Design estratégico e tecnologia de ponta para negócios que querem escalar.
+                    </p>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#solucao">Solução</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#cases">Cases</a></li>
+                        <li><a href="quiz.html">Consultoria Grátis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Suporte</h4>
+                    <ul>
+                        <li><a href="#contato">Fale Conosco</a></li>
+                        <li><a href="https://wa.me/5563984861923" target="_blank">WhatsApp</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="termos.html">Termos de Uso</a></li>
+                        <li><a href="privacidade.html">Privacidade</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <p style="color: var(--text-muted); font-size: 0.85rem;">© 2026 Agência Higher. Todos os direitos reservados.</p>
+                <div style="display: flex; gap: 1rem;">
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: 0.3s;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="#" style="width: 40px; height: 40px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: 0.3s;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="3"></circle></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL QUALIFICAÇÃO (FUNIL DE VENDAS) -->
+    <div class="modal-overlay" id="modal-checkout">
+        <div class="checkout-modal">
+            <button class="modal-close" onclick="closeCheckout()">✕</button>
+            
+            <div class="checkout-grid">
+                <!-- Coluna da Esquerda: Resumo do Plano -->
+                <div class="checkout-summary-side">
+                    <div class="checkout-badge">Você escolheu</div>
+                    <h2 id="checkout-plan-name" class="checkout-plan-title"></h2>
+                    <div class="checkout-price-box">
+                        <span class="checkout-price-label">Investimento Estimado</span>
+                        <strong id="checkout-plan-price" class="checkout-plan-price"></strong>
+                    </div>
+                    <div class="checkout-benefits">
+                        <div class="checkout-benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>Análise técnica de viabilidade</span>
+                        </div>
+                        <div class="checkout-benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>Contato estratégico em até 24h</span>
+                        </div>
+                        <div class="checkout-benefit-item">
+                            <span class="benefit-icon">✓</span>
+                            <span>Planejamento de escala personalizado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coluna da Direita: Formulário -->
+                <div class="checkout-form-side">
+                    <h3 class="checkout-form-title">Dados de Contato</h3>
+                    <p class="checkout-form-subtitle">Preencha os dados abaixo para avançar.</p>
+                    
+                    <form id="checkout-form">
+                        <input type="hidden" id="checkout-plan-id">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chk-name">Nome Completo</label>
+                                <input type="text" id="chk-name" required placeholder="Seu nome completo">
+                            </div>
+                        </div>
+                        <div class="form-row two-cols">
+                            <div class="form-group">
+                                <label for="chk-email">E-mail Profissional</label>
+                                <input type="email" id="chk-email" required placeholder="seu@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="chk-whatsapp">WhatsApp</label>
+                                <input type="tel" id="chk-whatsapp" required placeholder="(00) 00000-0000">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="chk-doc">CPF ou CNPJ</label>
+                                <input type="text" id="chk-doc" required placeholder="000.000.000-00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="chk-details">Qual o seu principal objetivo?</label>
+                            <textarea id="chk-details" placeholder="Descreva brevemente o que você espera alcançar..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-checkout" id="btn-submit-checkout">
+                            SOLICITAR ANÁLISE DO PROJETO
+                        </button>
+                    </form>
+                    
+                    <!-- Success Message -->
+                    <div id="checkout-success" style="display:none;" class="checkout-success-state">
+                        <div class="success-icon">🚀</div>
+                        <h3>Pedido Recebido!</h3>
+                        <p>Nosso time estratégico vai validar seu perfil. Entraremos em contato via WhatsApp em até 24h.</p>
+                        <button class="btn btn-secondary" style="margin-top: 2rem; width: 100%;" onclick="closeCheckout()">VOLTAR AO SITE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LGPD Cookie Banner -->
+    <div id="cookie-banner" style="display:none; position:fixed; bottom:2rem; left:2rem; right:2rem; background:rgba(26,26,26,0.95); backdrop-filter:blur(10px); border:1px solid var(--border); padding:1.5rem; border-radius:20px; z-index:5000; display:flex; align-items:center; justify-content:space-between; gap:2rem; box-shadow:0 20px 40px rgba(0,0,0,0.5); animation:modalSlideUp 0.6s ease-out;">
+        <div style="flex:1;">
+            <p style="font-size:0.9rem; color:var(--text-secondary); margin:0;">
+                Valorizamos sua privacidade. Utilizamos cookies para melhorar sua experiência e analisar nosso tráfego. 
+                Ao continuar navegando, você concorda com nossa <a href="privacidade.html" style="color:var(--accent); text-decoration:underline;">Política de Privacidade</a>.
+            </p>
+        </div>
+        <div style="display:flex; gap:1rem; flex-shrink:0;">
+            <button onclick="acceptCookies()" class="btn btn-primary" style="padding:0.75rem 1.5rem; font-size:0.85rem;">ACEITAR TODOS</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // LGPD Cookie Logic
+        function acceptCookies() {
+            localStorage.setItem('higher_cookies_accepted', 'true');
+            document.getElementById('cookie-banner').style.display = 'none';
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            if (!localStorage.getItem('higher_cookies_accepted')) {
+                document.getElementById('cookie-banner').style.display = 'flex';
+            } else {
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        });
+
+        // Local reveal logic
+        const observer = new IntersectionObserver(e => {
+            e.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible') });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        
+        // Navigation scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile Menu
+        const mobileToggle = document.getElementById('mobile-toggle');
+        const mobileMenu = document.getElementById('mobile-menu-overlay');
+        const closeMobile = document.getElementById('close-mobile');
+
+        mobileToggle.onclick = () => mobileMenu.style.display = 'flex';
+        closeMobile.onclick = () => mobileMenu.style.display = 'none';
+        function closeMobileMenu() { mobileMenu.style.display = 'none'; }
+    </script>
+</body>
+</html>

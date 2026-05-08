@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ — Agência Higher</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .faq-content { padding: 8rem 0; max-width: 900px; margin: 0 auto; }
+        .faq-header { text-align: center; margin-bottom: 4rem; }
+        .faq-header h1 { font-family: var(--font-display); font-size: 3.5rem; margin-bottom: 1rem; }
+        
+        .faq-grid { display: flex; flex-direction: column; gap: 1rem; }
+        .faq-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; transition: 0.3s; }
+        .faq-item:hover { border-color: var(--accent); }
+        
+        .faq-question { padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-weight: 600; font-family: var(--font-display); }
+        .faq-answer { padding: 0 2rem; max-height: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); color: var(--text-secondary); }
+        .faq-item.active .faq-answer { padding-bottom: 1.5rem; max-height: 200px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); color: var(--accent); }
+        .faq-icon { transition: 0.3s; font-size: 1.2rem; }
+        
+        .back-link { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-muted); text-decoration: none; margin-bottom: 2rem; transition: 0.3s; }
+        .back-link:hover { color: var(--accent); }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="container faq-content">
+        <a href="index.html" class="back-link">← Voltar para a Home</a>
+        <div class="faq-header">
+            <h1>Perguntas Frequentes</h1>
+            <p>Tudo o que você precisa saber sobre como trabalhamos.</p>
+        </div>
+        
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">Quanto tempo leva para criar uma Landing Page? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    O prazo médio para entrega de uma Landing Page de alta conversão é de 7 a 15 dias úteis, dependendo da complexidade do projeto e da agilidade no envio dos materiais base.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Vocês fazem gestão de tráfego pago? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    Nosso foco principal é em Design Estratégico e Engenharia Digital (Sites e Automações). No entanto, trabalhamos em parceria com gestores de tráfego e entregamos toda a estrutura técnica pronta para receber anúncios.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">O que é a automação de WhatsApp? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    É um sistema inteligente que atende seus clientes instantaneamente no WhatsApp, qualifica o lead através de perguntas automáticas e só passa para o atendimento humano quando o cliente está pronto para comprar.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Eu terei acesso ao código ou painel do meu site? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    Sim! Todos os nossos projetos são entregues com acesso total. Dependendo da tecnologia escolhida, você terá um painel administrativo intuitivo para fazer edições simples.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">Vocês atendem empresas de qualquer lugar? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    Sim, atendemos clientes em todo o Brasil e no exterior. Nossas reuniões e processos são 100% digitais e otimizados para entrega remota de alta performance.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                const isActive = parent.classList.contains('active');
+                
+                document.querySelectorAll('.faq-item').forEach(child => child.classList.remove('active'));
+                
+                if (!isActive) {
+                    parent.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

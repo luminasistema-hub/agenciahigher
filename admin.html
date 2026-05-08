@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | Agência Higher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="admin.css?v=2.0" />
+  <link rel="stylesheet" href="admin-financial.css?v=2.0" />
+  <link rel="stylesheet" href="js-ui-polish.css?v=2.0" />
+</head>
+<body>
+
+  <div id="toast-container" class="toast-container"></div>
+
+  <div id="login-screen" class="login-screen">
+    <div class="login-glow"></div>
+    <div class="login-card">
+      <div class="login-header">
+        <div class="login-logo"><div class="logo-icon">H</div><span class="logo-text">Higher</span></div>
+        <h1 class="login-title">Admin Higher</h1>
+        <p class="login-sub">Portal Administrativo</p>
+      </div>
+      <form id="login-form">
+        <div class="field-group"><label>E-mail</label><input type="email" id="login-email" placeholder="seu@email.com" required /></div>
+        <div class="field-group"><label>Senha</label><input type="password" id="login-password" placeholder="••••••••" required /></div>
+        <div id="login-error" class="login-error" style="display: none;"></div>
+        <button type="submit" id="btn-login" class="btn-primary" style="width: 100%; padding: 1rem;">Entrar no Painel</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="admin-app" class="admin-app" style="display: none;">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-logo"><div class="logo-icon">H</div><span>Higher</span></div>
+        <button id="sidebar-toggle" class="sidebar-toggle">❮</button>
+      </div>
+      <nav class="sidebar-nav">
+        <ul>
+          <li><button class="nav-item active" id="nav-dashboard" data-view="dashboard"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></button></li>
+          <li><button class="nav-item" id="nav-leads" data-view="leads"><span class="nav-icon">🎯</span><span class="nav-label">Leads</span><span class="nav-badge" id="leads-badge" style="display:none">0</span></button></li>
+          <li><button class="nav-item" id="nav-clients" data-view="clients"><span class="nav-icon">👥</span><span class="nav-label">Clientes</span></button></li>
+          <li><button class="nav-item" id="nav-projects" data-view="projects"><span class="nav-icon">📂</span><span class="nav-label">Projetos</span></button></li>
+          <li><button class="nav-item" id="nav-kanban" data-view="kanban"><span class="nav-icon">📋</span><span class="nav-label">Kanban</span></button></li>
+          <li class="nav-separator"></li>
+          <li><button class="nav-item" id="nav-financial" data-view="financial"><span class="nav-icon">💰</span><span class="nav-label">Financeiro</span></button></li>
+          <li><button class="nav-item" id="nav-budgets" data-view="budgets"><span class="nav-icon">📄</span><span class="nav-label">Orçamentos</span></button></li>
+          <li><button class="nav-item" id="nav-contracts" data-view="contracts"><span class="nav-icon">📜</span><span class="nav-label">Contratos</span></button></li>
+          <li><button class="nav-item" id="nav-contacts" data-view="contacts"><span class="nav-icon">✉️</span><span class="nav-label">Contatos</span></button></li>
+        </ul>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar" id="user-avatar">H</div>
+          <div class="user-details"><p class="user-name" id="user-name">Admin</p></div>
+        </div>
+        <button class="btn-logout" id="btn-logout">Sair</button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="mobile-menu-btn" class="mobile-menu-btn">☰</button>
+          <h2 class="view-title" id="view-title">Dashboard</h2>
+        </div>
+        <div class="topbar-right">
+          <button id="btn-refresh" class="topbar-btn">🔄</button>
+          <div class="topbar-time" id="topbar-time">00:00</div>
+        </div>
+      </header>
+
+      <section id="view-dashboard" class="view active">
+        <!-- DASHBOARD STATS -->
+        <div class="dash-grid-stats">
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(255, 107, 26, 0.1); color:var(--brand-orange)">💰</div>
+            <div class="stat-content">
+              <p class="stat-label">MRR (Recorrente)</p>
+              <h3 class="stat-value" id="stat-mrr">R$ 0,00</h3>
+              <p class="stat-change positive">↑ 12% vs mês anterior</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(0, 200, 83, 0.1); color:#00c853">🚀</div>
+            <div class="stat-content">
+              <p class="stat-label">Projetos Ativos</p>
+              <h3 class="stat-value" id="stat-projects">0</h3>
+              <p class="stat-change">Em execução</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(41, 121, 255, 0.1); color:#2979ff">🔥</div>
+            <div class="stat-content">
+              <p class="stat-label">Novas Leads</p>
+              <h3 class="stat-value" id="stat-leads">0</h3>
+              <p class="stat-change">Últimos 7 dias</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon" style="background:rgba(101, 31, 255, 0.1); color:#651fff">📈</div>
+            <div class="stat-content">
+              <p class="stat-label">Taxa de Conversão</p>
+              <h3 class="stat-value" id="stat-conversion">0%</h3>
+              <p class="stat-change">Oportunidades ganhas</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- DASHBOARD CHARTS -->
+        <div class="dash-charts-grid">
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title">Crescimento de Receita (MRR)</h3>
+            </div>
+            <div class="chart-container" style="position: relative; height:280px;">
+              <canvas id="chart-revenue"></canvas>
+            </div>
+          </div>
+          <div class="card chart-card">
+            <div class="card-header">
+              <h3 class="card-title">Saúde do Funil</h3>
+            </div>
+            <div class="chart-container" style="position: relative; height:280px;">
+              <canvas id="chart-funnel"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECENT ACTIVITY -->
+        <div class="dash-activity-grid">
+          <div class="dash-panel">
+            <div class="panel-header"><h3>Leads Recentes</h3></div>
+            <div class="panel-body"><div id="dash-leads-list" class="mini-list"></div></div>
+          </div>
+          <div class="dash-panel">
+            <div class="panel-header"><h3>Feedbacks do Cliente</h3></div>
+            <div class="panel-body"><div id="dash-feedback-list" class="mini-list"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="view-leads" class="view">
+        <div class="view-toolbar">
+          <div class="search-wrap"><input type="text" class="search-input" id="leads-search" placeholder="Buscar..." /></div>
+          <div class="filter-wrap">
+            <select id="leads-filter-plan" class="filter-select"><option value="">Todos Planos</option><option value="starter">Starter</option><option value="growth">Growth</option><option value="pro">Pro</option></select>
+            <select id="leads-filter-status" class="filter-select"><option value="">Todos Status</option><option value="new">Novo</option><option value="contacted">Contatado</option></select>
+          </div>
+        </div>
+        <div class="table-container"><table class="data-table"><thead><tr><th>Lead</th><th>WhatsApp</th><th>Empresa</th><th>Projeto</th><th>Progresso</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead><tbody id="leads-tbody"></tbody></table></div>
+      </section>
+
+      <section id="view-clients" class="view">
+        <div class="view-toolbar"><input type="text" class="search-input" id="clients-search" placeholder="Buscar..." /><button class="btn-primary" onclick="openClientModal()">+ Novo Cliente</button></div>
+        <div id="clients-grid" class="clients-grid"></div>
+      </section>
+
+      <section id="view-projects" class="view">
+        <div class="view-toolbar"><input type="text" class="search-input" id="projects-search" placeholder="Buscar..." /><button class="btn-primary" onclick="openProjectModal()">+ Novo Projeto</button></div>
+        <div id="projects-list" class="projects-list"></div>
+      </section>
+
+      <section id="view-kanban" class="view">
+        <div class="view-toolbar"><select id="kanban-project-select" class="filter-select"><option value="">Selecione um projeto...</option></select><button id="btn-new-task" class="btn-primary" onclick="openTaskModal()" disabled>+ Tarefa</button></div>
+        <div class="kanban-board" id="kanban-board"></div>
+      </section>
+
+      <section id="view-financial" class="view">
+        <div class="financial-container">
+          <div id="fin-overdue-banner" class="fin-banner danger" style="display:none">
+            <div class="banner-icon">⚠️</div>
+            <div class="banner-info"><strong><span id="fin-overdue-count">0</span> faturas atrasadas</strong><p>Total: <span id="fin-overdue-amount">R$ 0,00</span></p></div>
+          </div>
+          <div class="stat-cards" style="margin-bottom: 1.5rem;">
+            <div class="stat-card" id="stat-pending">
+              <div class="stat-icon" style="background:rgba(245,158,11,0.1); color:#F59E0B">⏳</div>
+              <div class="stat-info"><span class="stat-label">Pendente</span><span class="stat-value" id="fin-stat-pending">R$ 0</span></div>
+            </div>
+            <div class="stat-card" id="stat-received">
+              <div class="stat-icon" style="background:rgba(34,197,94,0.1); color:#22C55E">💰</div>
+              <div class="stat-info"><span class="stat-label">Recebido</span><span class="stat-value" id="fin-stat-received">R$ 0</span></div>
+            </div>
+            <div class="stat-card" id="stat-overdue">
+              <div class="stat-icon" style="background:rgba(239,68,68,0.1); color:#EF4444">⚠️</div>
+              <div class="stat-info"><span class="stat-label">Atrasado</span><span class="stat-value" id="fin-stat-overdue">R$ 0</span></div>
+            </div>
+            <div class="stat-card" id="stat-mrr">
+              <div class="stat-icon" style="background:rgba(252,81,48,0.1); color:#FC5130">🔄</div>
+              <div class="stat-info"><span class="stat-label">MRR Atual</span><span class="stat-value" id="fin-stat-mrr">R$ 0</span></div>
+            </div>
+          </div>
+          <div class="view-toolbar">
+            <div class="filter-wrap">
+              <select id="fin-filter-status" class="filter-select"><option value="">Todos Status</option><option value="paid">Pago</option><option value="overdue">Atrasado</option><option value="sent">Pendente</option></select>
+              <select id="fin-filter-client" class="filter-select"><option value="">Todos Clientes</option></select>
+            </div>
+            <div class="view-actions">
+              <button class="btn-ghost" onclick="openProductsModal()">📦 Produtos & Serviços</button>
+              <button class="btn-ghost" onclick="openWebhookLogsModal()">📡 Logs</button>
+              <button class="btn-primary" onclick="openInvoiceModal()">+ Criar Fatura (Asaas)</button>
+              <button class="btn-ghost" onclick="openFinancialSettings()">⚙️ Configurações</button>
+            </div>
+          </div>
+          <div class="table-container"><table class="data-table"><thead><tr><th>Fatura</th><th>Cliente</th><th>Valor</th><th>Vencimento</th><th>Status</th><th>Ações</th></tr></thead><tbody id="invoices-tbody"></tbody></table></div>
+        </div>
+      </section>
+
+      <section id="view-contacts" class="view">
+        <div class="table-container"><table class="data-table"><thead><tr><th>Nome</th><th>E-mail</th><th>Data</th><th>Status</th><th>Ações</th></tr></thead><tbody id="contacts-tbody"></tbody></table></div>
+      </section>
+
+      <section id="view-budgets" class="view">
+        <div class="view-toolbar">
+          <div class="search-wrap"><input type="text" class="search-input" id="budgets-search" placeholder="Buscar orçamentos..." /></div>
+          <div class="filter-wrap">
+            <select id="budget-filter-status" class="filter-select">
+              <option value="">Todos Status</option>
+              <option value="draft">Rascunho</option>
+              <option value="sent">Enviado</option>
+              <option value="approved">Aprovado</option>
+              <option value="declined">Recusado</option>
+            </select>
+          </div>
+          <button class="btn-primary" onclick="openBudgetModal()">+ Novo Orçamento</button>
+        </div>
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Nº</th>
+                <th>Cliente</th>
+                <th>Título</th>
+                <th>Valor</th>
+                <th>Validade</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="budgets-tbody"></tbody>
+          </table>
+        </div>
+      </section>
+      <!-- VIEW: CONTRACTS -->
+      <section id="view-contracts" class="view">
+        <div class="section-header">
+          <div class="header-content">
+            <h2 class="section-title">📜 Gestão de Contratos</h2>
+            <p class="section-subtitle">Acompanhe todos os instrumentos jurídicos da Agência Higher.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>PROJETO / CONTRATO</th>
+                <th>CLIENTE</th>
+                <th>DATA</th>
+                <th>STATUS</th>
+                <th>AÇÕES</th>
+              </tr>
+            </thead>
+            <tbody id="contracts-tbody">
+              <!-- Gerado via JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MODAL: VIEW CONTRACT -->
+      <div id="modal-view-contract" class="modal-overlay">
+        <div class="modal" style="max-width: 900px; width: 95%;">
+          <div class="modal-header">
+            <h3 class="modal-title">📄 Visualizar Contrato</h3>
+            <button class="modal-close" onclick="closeModal('modal-view-contract')">✕</button>
+          </div>
+          <div id="contract-viewer-content" style="background: white; border-radius: 8px; max-height: 70vh; overflow-y: auto; padding: 2rem; color: #333;">
+            <!-- Conteúdo carregado dinamicamente -->
+          </div>
+          <div class="modal-footer" style="margin-top: 1.5rem; display: flex; gap: 1rem; justify-content: flex-end;">
+            <button class="btn-ghost" onclick="closeModal('modal-view-contract')">Fechar</button>
+            <button class="btn-primary" onclick="window.printCurrentContract()">🖨️ Imprimir / PDF</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- MODALS -->
+  <div id="modal-lead" class="modal-overlay"><div class="modal"><div class="modal-header"><h3 class="modal-title">Detalhes</h3><button class="modal-close" onclick="closeModal('modal-lead')">✕</button></div><div class="modal-body" id="modal-lead-body"></div></div></div>
+
+  <div id="modal-client" class="modal-overlay">
+    <div class="modal"><div class="modal-header"><h3 class="modal-title" id="client-modal-title">Cliente</h3><button class="modal-close" onclick="closeModal('modal-client')">✕</button></div>
+    <div class="modal-body"><form id="client-form"><input type="hidden" id="client-id" />
+      <div class="field-group"><label>Nome</label><input type="text" id="cf-name" required /></div>
+      <div class="field-group"><label>Empresa</label><input type="text" id="cf-company" /></div>
+      <div class="field-group"><label>E-mail</label><input type="email" id="cf-email" /></div>
+      <div class="field-group"><label>WhatsApp</label><input type="text" id="cf-whatsapp" /></div>
+      <div class="field-group"><label>CPF/CNPJ</label><input type="text" id="cf-document" /></div>
+      <div class="dash-grid"><div class="field-group"><label>CEP</label><input type="text" id="cf-postalcode" /></div><div class="field-group"><label>Nº</label><input type="text" id="cf-number" /></div></div>
+      <div class="dash-grid"><div class="field-group"><label>Plano</label><select id="cf-plan"><option value="starter">Starter</option><option value="growth">Growth</option><option value="pro">Pro</option></select></div><div class="field-group"><label>Status</label><select id="cf-status"><option value="active">Ativo</option><option value="inactive">Inativo</option></select></div></div>
+      <button type="submit" class="btn-primary" style="width:100%">Salvar</button></form></div></div>
+  </div>
+
+  <div id="modal-project" class="modal-overlay">
+    <div class="modal"><div class="modal-header"><h3 class="modal-title" id="project-modal-title">Projeto</h3><button class="modal-close" onclick="closeModal('modal-project')">✕</button></div>
+    <div class="modal-body"><form id="project-form"><input type="hidden" id="project-id" />
+      <div class="field-group"><label>Nome do Projeto</label><input type="text" id="pf-name" placeholder="Ex: Site de Vendas" required /></div>
+      <div class="field-group"><label>Cliente</label><select id="pf-client" required></select></div>
+      <div class="dash-grid">
+        <div class="field-group"><label>Plano</label><select id="pf-plan"><option value="starter">Starter</option><option value="growth">Growth</option><option value="pro">Pro</option></select></div>
+        <div class="field-group"><label>Prazo</label><input type="date" id="pf-deadline" /></div>
+      </div>
+      <div class="dash-grid">
+        <div class="field-group"><label>Status</label><select id="pf-status"><option value="active">Ativo</option><option value="completed">Concluído</option><option value="paused">Pausado</option></select></div>
+        <div class="field-group"><label>Progresso %</label><input type="number" id="pf-progress" min="0" max="100" /></div>
+      </div>
+      <div class="field-group"><label>Descrição / Escopo</label><textarea id="pf-description" placeholder="Detalhes do que será entregue..."></textarea></div>
+      <button type="submit" id="btn-save-project" class="btn-primary" style="width:100%">Salvar Projeto</button></form></div></div>
+  </div>
+
+  <div id="modal-delivery" class="modal-overlay">
+    <div class="modal modal-lg"><div class="modal-header"><h3 class="modal-title">📦 Gestão de Entregas</h3><button class="modal-close" onclick="closeModal('modal-delivery')">✕</button></div>
+    <div class="modal-body">
+      <div class="dash-grid" style="grid-template-columns: 1fr 350px; gap: 2rem;">
+        <!-- Lado Esquerdo: Lista de Entregas -->
+        <div>
+          <h4 style="margin-bottom: 1rem; font-size: 0.9rem; color: #999;">HISTÓRICO DE MATERIAIS</h4>
+          <div id="df-list" style="max-height: 400px; overflow-y: auto; display: flex; flex-direction: column; gap: 1rem;">
+            <!-- Render via JS -->
+            <p style="color: #444; font-size: 0.9rem;">Carregando histórico...</p>
+          </div>
+        </div>
+
+        <!-- Lado Direito: Nova Entrega -->
+        <div style="background: rgba(255,255,255,0.02); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border);">
+          <h4 style="margin-bottom: 1.5rem; font-size: 0.9rem;">+ NOVA ENTREGA</h4>
+          <form id="delivery-form" onsubmit="handleSaveDelivery(event)">
+            <input type="hidden" id="df-project-id" />
+            <div class="field-group"><label>Nome</label><input type="text" id="df-name" placeholder="Ex: Logotipo Final" required /></div>
+            <div class="field-group"><label>Link (URL)</label><input type="url" id="df-url" placeholder="https://..." required /></div>
+            <div class="field-group"><label>Descrição</label><textarea id="df-description" style="height: 60px;" placeholder="Instruções..."></textarea></div>
+            <button type="submit" id="btn-save-delivery" class="btn-primary" style="width:100%">Enviar p/ Portal</button>
+          </form>
+        </div>
+      </div>
+    </div></div>
+  </div>
+
+  <div id="modal-task" class="modal-overlay">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 class="modal-title" id="task-modal-title">Tarefa</h3>
+        <button class="modal-close" onclick="closeModal('modal-task')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="task-form">
+          <input type="hidden" id="task-id" />
+          <input type="hidden" id="task-project-id" />
+          
+          <div class="field-group">
+            <label>Título</label>
+            <input type="text" id="tf-title" placeholder="O que precisa ser feito?" required />
+          </div>
+          
+          <div class="dash-grid">
+            <div class="field-group">
+              <label>Coluna</label>
+              <select id="tf-column" required></select>
+            </div>
+            <div class="field-group">
+              <label>Prioridade</label>
+              <select id="tf-priority">
+                <option value="low">Baixa</option>
+                <option value="medium" selected>Média</option>
+                <option value="high">Alta</option>
+                <option value="urgent">Urgente</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field-group">
+            <label>Descrição Detalhada</label>
+            <textarea id="tf-description" style="height: 100px;" placeholder="Detalhes da demanda..."></textarea>
+          </div>
+
+          <div class="task-details-stack" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 2rem;">
+            <!-- Checklist Section -->
+            <div class="checklist-section">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                  <label style="margin: 0; font-size: 0.9rem; font-weight: 700;">📋 Checklist</label>
+                  <div id="tf-checklist-progress-container" style="width: 150px; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden;">
+                    <div id="tf-checklist-progress-bar" style="width: 0%; height: 100%; background: var(--brand-orange); transition: width 0.3s ease;"></div>
+                  </div>
+                  <span id="tf-checklist-progress-text" style="font-size: 0.75rem; color: var(--text-3); font-weight: 600;">0%</span>
+                </div>
+                <button type="button" class="btn-ghost btn-sm" onclick="addChecklistItem()">+ Adicionar Item</button>
+              </div>
+              <div id="tf-checklist-container" class="checklist-list"></div>
+            </div>
+
+            <!-- Attachments Section -->
+            <div class="attachments-section">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <label style="margin: 0; font-size: 0.9rem; font-weight: 700;">🔗 Links e Referências</label>
+                <button type="button" class="btn-ghost btn-sm" onclick="addAttachmentItem()">+ Adicionar Link</button>
+              </div>
+              <div id="tf-attachments-container" class="attachments-list"></div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+            <button type="submit" id="btn-save-task" class="btn-primary" style="width:100%">Salvar Tarefa</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-invoice" class="modal-overlay">
+    <div class="modal modal-lg"><div class="modal-header"><h3 class="modal-title" id="inv-modal-title">Fatura Asaas</h3><button class="modal-close" onclick="closeModal('modal-invoice')">✕</button></div>
+    <div class="modal-body"><form id="invoice-modal-form" onsubmit="handleSaveInvoice(event)">
+      <div class="dash-grid"><div class="field-group"><label>Cliente</label><select id="inv-client" required></select></div><div class="field-group"><label>Projeto</label><select id="inv-project"></select></div></div>
+      <div class="dash-grid"><div class="field-group"><label>Vencimento</label><input type="date" id="inv-due" required /></div><div class="field-group"><label>Método</label><select id="inv-method"><option value="boleto">Boleto</option><option value="pix">PIX</option></select></div></div>
+      <div class="table-container"><table class="data-table"><thead><tr><th>Serviço</th><th>Qtd</th><th>Preço</th><th>Total</th><th></th></tr></thead><tbody id="invoice-items-tbody"></tbody></table><button type="button" class="btn-ghost" onclick="addItem()">+ Adicionar Item</button></div>
+      <div class="dash-grid"><div class="field-group"><label>Desconto</label><input type="number" id="inv-discount" value="0" /></div><div class="field-group"><label>Tipo</label><select id="inv-discount-type"><option value="fixed">Fixo (R$)</option><option value="percent">Percentual (%)</option></select></div></div>
+      <div class="field-group"><label>Observações</label><textarea id="inv-notes" placeholder="Notas na fatura..."></textarea></div>
+      <div style="text-align:right; margin:1rem 0; font-size:1.2rem">Total: <strong id="inv-total-display">R$ 0,00</strong></div>
+      <div class="field-group"><label><input type="checkbox" id="inv-recurring" /> Gerar Assinatura Recorrente</label></div>
+      <div id="recurrence-box" style="display:none"><div class="field-group"><label>Frequência</label><select id="inv-recurrence"><option value="monthly">Mensal</option></select></div></div>
+      <button type="submit" id="btn-save-invoice" class="btn-primary" style="width:100%">Gerar Cobrança</button></form></div></div>
+  </div>
+
+  <div id="modal-payment" class="modal-overlay"><div class="modal"><div class="modal-header"><h3 class="modal-title">Baixa Manual</h3><button class="modal-close" onclick="closeModal('modal-payment')">✕</button></div>
+    <div class="modal-body"><form id="payment-form"><input type="hidden" id="pay-invoice-id" /><div id="pay-invoice-info"></div>
+      <div class="dash-grid"><div class="field-group"><label>Valor</label><input type="number" id="pay-amount" required /></div><div class="field-group"><label>Data</label><input type="date" id="pay-date" required /></div></div>
+      <div class="field-group"><label>Método</label><select id="pay-method"><option value="pix">PIX</option><option value="transfer">Transferência</option><option value="cash">Dinheiro</option></select></div>
+      <div class="field-group"><label>Referência</label><input type="text" id="pay-reference" placeholder="Ex: Comprovante #123" /></div>
+      <div class="field-group"><label>Notas</label><textarea id="pay-notes"></textarea></div>
+      <button type="submit" id="btn-save-payment" class="btn-primary" style="width:100%">Confirmar Recebimento</button></form></div></div>
+  </div>
+
+  <div id="modal-fin-settings" class="modal-overlay"><div class="modal modal-lg"><div class="modal-header"><h3 class="modal-title">Configurações Financeiras</h3><button class="modal-close" onclick="closeModal('modal-fin-settings')">✕</button></div>
+    <div class="modal-body"><form id="fin-settings-form" onsubmit="handleSaveFinancialSettings(event)">
+      <div class="dash-grid"><div class="field-group"><label>Empresa</label><input type="text" id="fs-company" /></div><div class="field-group"><label>CNPJ</label><input type="text" id="fs-cnpj" /></div></div>
+      <div class="dash-grid"><div class="field-group"><label>E-mail Contato</label><input type="email" id="fs-email" /></div><div class="field-group"><label>Telefone</label><input type="text" id="fs-phone" /></div></div>
+      <div class="dash-grid"><div class="field-group"><label>PIX</label><input type="text" id="fs-pix-key" /></div><div class="field-group"><label>Tipo PIX</label><select id="fs-pix-type"><option value="cnpj">CNPJ</option><option value="email">E-mail</option><option value="phone">Telefone</option></select></div></div>
+      <div class="dash-grid"><div class="field-group"><label>Banco</label><input type="text" id="fs-bank" /></div><div class="field-group"><label>Agência</label><input type="text" id="fs-agency" /></div><div class="field-group"><label>Conta</label><input type="text" id="fs-account" /></div></div>
+      <div class="dash-grid"><div class="field-group"><label>Prazo Padrão (Dias)</label><input type="number" id="fs-due-days" /></div><div class="field-group"><label>Prefixo Faturas</label><input type="text" id="fs-prefix" /></div></div>
+      <div class="field-group"><label>Asaas API Key</label><input type="password" id="fs-asaas-api" /></div>
+      <div class="field-group"><label>Asaas Wallet ID</label><input type="text" id="fs-asaas-wallet" /></div>
+      <div class="field-group"><label>Asaas Webhook Token</label><input type="password" id="fs-asaas-webhook" placeholder="Token definido no painel do Asaas" /></div>
+      <button type="submit" id="btn-save-fin-settings" class="btn-primary" style="width:100%">Salvar Configurações</button></form></div></div>
+  </div>
+
+  <div id="modal-invoice-detail" class="modal-overlay"><div class="modal modal-lg"><div class="modal-header"><h3>Detalhes da Fatura</h3><button class="modal-close" onclick="closeModal('modal-invoice-detail')">✕</button></div><div class="modal-body" id="modal-invoice-detail-body"></div></div></div>
+  <div id="modal-invoice-preview" class="modal-overlay"><div class="modal modal-lg"><div class="modal-header"><h3>Preview</h3><button class="modal-close" onclick="closeModal('modal-invoice-preview')">✕</button></div><div class="modal-body" id="invoice-preview-html"></div></div></div>
+
+  <!-- MODAL: PRODUCTS & SERVICES -->
+  <div id="modal-products" class="modal-overlay">
+    <div class="modal modal-lg">
+      <div class="modal-header"><h3 class="modal-title">Produtos & Serviços</h3><button class="modal-close" onclick="closeModal('modal-products')">✕</button></div>
+      <div class="modal-body">
+        <div class="dash-grid" style="grid-template-columns: 1fr 300px; gap: 1.5rem;">
+          <div class="product-list-side">
+            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+              <table class="data-table">
+                <thead><tr><th>Nome</th><th>Preço Padrão</th><th></th></tr></thead>
+                <tbody id="products-list-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="product-form-side">
+            <div class="panel-header"><h4>+ Novo Produto/Serviço</h4></div>
+            <form id="product-form" onsubmit="handleSaveProduct(event)" style="margin-top:1rem">
+              <input type="hidden" id="prod-id" />
+              <div class="field-group"><label>Nome do Serviço</label><input type="text" id="prod-name" placeholder="Ex: Gestão de Tráfego" required /></div>
+              <div class="field-group"><label>Preço Padrão (R$)</label><input type="number" id="prod-price" step="0.01" required /></div>
+              <button type="submit" id="btn-save-product" class="btn-primary" style="width:100%">Salvar</button>
+              <button type="button" class="btn-ghost" onclick="resetProductForm()" style="width:100%; margin-top:0.5rem">Limpar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: WEBHOOK LOGS -->
+  <!-- MODAL: BUDGET -->
+  <div id="modal-budget" class="modal-overlay">
+    <div class="modal modal-xl">
+      <div class="modal-header">
+        <h3 class="modal-title" id="budget-modal-title">Novo Orçamento</h3>
+        <button class="modal-close" onclick="closeModal('modal-budget')">✕</button>
+      </div>
+      <div class="modal-body">
+        <form id="budget-form">
+          <input type="hidden" id="budget-id" />
+          
+          <div class="dash-grid">
+            <div class="field-group">
+              <label>Cliente</label>
+              <select id="bf-client" required>
+                <option value="">Selecione um cliente...</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label>Título do Projeto</label>
+              <input type="text" id="bf-title" placeholder="Ex: Desenvolvimento Web Site Institucional" required />
+            </div>
+          </div>
+
+          <div class="dash-grid">
+            <div class="field-group">
+              <label>Validade</label>
+              <input type="date" id="bf-valid-until" required />
+            </div>
+            <div class="field-group">
+              <label>Status</label>
+              <select id="bf-status">
+                <option value="draft">Rascunho</option>
+                <option value="sent">Enviado</option>
+                <option value="approved">Aprovado</option>
+                <option value="declined">Recusado</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="budget-items-section" style="margin-top: 1.5rem;">
+            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <h4>Itens do Orçamento</h4>
+              <button type="button" class="btn-ghost btn-sm" onclick="addBudgetItem()">+ Adicionar Item</button>
+            </div>
+            <div class="table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Serviço/Produto</th>
+                    <th style="width: 80px;">Qtd</th>
+                    <th style="width: 150px;">V. Unitário</th>
+                    <th style="width: 150px;">Total</th>
+                    <th style="width: 50px;"></th>
+                  </tr>
+                </thead>
+                <tbody id="budget-items-tbody">
+                  <!-- Dynamic items -->
+                </tbody>
+              </table>
+              <datalist id="products-datalist"></datalist>
+            </div>
+          </div>
+
+          <div class="budget-footer-grid" style="display: grid; grid-template-columns: 1fr 300px; gap: 2rem; margin-top: 1.5rem;">
+            <div class="notes-side">
+              <div class="field-group">
+                <label>Observações / Termos</label>
+                <textarea id="bf-notes" style="height: 120px;" placeholder="Detalhes sobre o pagamento, prazos de entrega, etc..."></textarea>
+              </div>
+            </div>
+            <div class="summary-side">
+              <div class="summary-row" style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                <span>Subtotal</span>
+                <span id="budget-subtotal">R$ 0,00</span>
+              </div>
+              <div class="summary-row" style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                <div class="field-group" style="margin-bottom: 0; flex: 1;">
+                  <label style="font-size: 0.8rem;">Desconto (%)</label>
+                  <input type="number" id="bf-discount" value="0" min="0" max="100" style="width: 60px; padding: 0.2rem;" onchange="calculateBudgetTotal()" />
+                </div>
+                <span id="budget-discount-val" style="align-self: flex-end; padding-bottom: 0.3rem;">- R$ 0,00</span>
+              </div>
+              <div class="summary-row" style="display: flex; justify-content: space-between; padding: 1rem 0; font-size: 1.2rem; font-weight: 700; color: var(--primary-color);">
+                <span>Total</span>
+                <span id="budget-total">R$ 0,00</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: flex-end;">
+            <button type="button" class="btn-ghost" onclick="closeModal('modal-budget')">Cancelar</button>
+            <button type="submit" class="btn-primary" style="padding-left: 2rem; padding-right: 2rem;">Salvar Orçamento</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-webhook-logs" class="modal-overlay">
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 class="modal-title">📡 Logs de Webhook (Asaas)</h3>
+        <button class="btn-close" onclick="closeModal('modal-webhook-logs')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Evento</th>
+                <th>Status CRM</th>
+                <th>Payload (Resumo)</th>
+              </tr>
+            </thead>
+            <tbody id="webhook-logs-tbody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script type="module" src="js/deliveries.js"></script>
+  <script type="module" src="js/main.js?v=2.0.2"></script>
+</body>
+</html>

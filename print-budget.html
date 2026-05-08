@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento | Agência Higher</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #FC5130;
+      --text: #1A1A1A;
+      --text-light: #666;
+      --border: #EEE;
+      --bg-alt: #FAFAFA;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); line-height: 1.5; padding: 2rem; background: #FFF; }
+    
+    .container { max-width: 800px; margin: 0 auto; border: 1px solid var(--border); padding: 3rem; position: relative; }
+    
+    header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
+    .logo-box { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-icon { background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'Outfit'; font-size: 1.5rem; }
+    .logo-text { font-family: 'Outfit'; font-size: 1.5rem; font-weight: 700; }
+    
+    .budget-info { text-align: right; }
+    .budget-info h1 { font-family: 'Outfit'; font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
+    .budget-info p { color: var(--text-light); font-size: 0.9rem; }
+    
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+    .details-box h3 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); margin-bottom: 0.5rem; }
+    .details-box p { font-weight: 600; }
+    
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th { text-align: left; background: var(--bg-alt); padding: 1rem; font-size: 0.8rem; text-transform: uppercase; border-bottom: 1px solid var(--border); }
+    td { padding: 1rem; border-bottom: 1px solid var(--border); }
+    .col-qty { width: 60px; text-align: center; }
+    .col-price, .col-total { width: 120px; text-align: right; }
+    
+    .summary { margin-left: auto; width: 250px; margin-top: 2rem; }
+    .summary-row { display: flex; justify-content: space-between; padding: 0.5rem 0; }
+    .summary-row.total { border-top: 2px solid var(--text); margin-top: 0.5rem; padding-top: 1rem; font-weight: 800; font-size: 1.2rem; color: var(--primary); }
+    
+    .notes { margin-top: 3rem; padding: 1.5rem; background: var(--bg-alt); border-radius: 8px; font-size: 0.9rem; }
+    .notes h4 { margin-bottom: 0.5rem; }
+    
+    footer { margin-top: 4rem; text-align: center; font-size: 0.8rem; color: var(--text-light); border-top: 1px solid var(--border); padding-top: 2rem; }
+    
+    @media print {
+      body { padding: 0; }
+      .container { border: none; padding: 0; }
+      .no-print { display: none; }
+    }
+    
+    .no-print { position: fixed; top: 1rem; right: 1rem; display: flex; gap: 0.5rem; }
+    .btn { padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; border: none; font-weight: 600; }
+    .btn-print { background: var(--primary); color: white; }
+  </style>
+</head>
+<body>
+
+  <div class="no-print">
+    <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+  </div>
+
+  <div class="container" id="budget-content">
+    <header>
+      <div class="logo-box">
+        <div class="logo-icon">H</div>
+        <span class="logo-text">Higher</span>
+      </div>
+      <div class="budget-info">
+        <h1>ORÇAMENTO</h1>
+        <p id="b-number">#0000</p>
+        <p id="b-date">Data: --/--/----</p>
+      </div>
+    </header>
+
+    <div class="details-grid">
+      <div class="details-box">
+        <h3>CLIENTE</h3>
+        <p id="b-client-name">...</p>
+        <p id="b-client-email" style="font-weight: 400; font-size: 0.9rem;"></p>
+      </div>
+      <div class="details-box">
+        <h3>VALIDADE</h3>
+        <p id="b-validity">Válido até: --/--/----</p>
+      </div>
+    </div>
+
+    <div class="details-box" style="margin-bottom: 2rem;">
+      <h3>PROJETO</h3>
+      <p id="b-title" style="font-size: 1.1rem; color: var(--primary);">...</p>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição do Serviço</th>
+          <th class="col-qty">Qtd</th>
+          <th class="col-price">V. Unitário</th>
+          <th class="col-total">Total</th>
+        </tr>
+      </thead>
+      <tbody id="b-items">
+        <!-- Items -->
+      </tbody>
+    </table>
+
+    <div class="summary">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="b-subtotal">R$ 0,00</span>
+      </div>
+      <div class="summary-row" id="row-discount" style="display: none;">
+        <span>Desconto</span>
+        <span id="b-discount">- R$ 0,00</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="b-total">R$ 0,00</span>
+      </div>
+    </div>
+
+    <div class="notes" id="notes-container" style="display: none;">
+      <h4>Observações e Termos</h4>
+      <div id="b-notes"></div>
+    </div>
+
+    <footer>
+      <p><strong>Agência Higher</strong> — Soluções Digitais de Alta Performance</p>
+      <p>www.agenciahigher.com.br</p>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script>
+    async function loadBudget() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+      if (!id) return;
+
+      const db = getSupabase();
+      const { data, error } = await db
+        .from('budgets')
+        .select('*, clients(*)')
+        .eq('id', id)
+        .single();
+
+      if (error || !data) {
+        alert('Orçamento não encontrado.');
+        return;
+      }
+
+      document.getElementById('b-number').textContent = `#${data.id.toString().slice(-4).toUpperCase()}`;
+      document.getElementById('b-date').textContent = `Data: ${new Date(data.created_at).toLocaleDateString('pt-BR')}`;
+      document.getElementById('b-client-name').textContent = data.clients?.name || 'Cliente';
+      document.getElementById('b-client-email').textContent = data.clients?.email || '';
+      document.getElementById('b-validity').textContent = `Válido até: ${new Date(data.valid_until).toLocaleDateString('pt-BR')}`;
+      document.getElementById('b-title').textContent = data.title;
+
+      const itemsTbody = document.getElementById('b-items');
+      let subtotal = 0;
+      
+      data.items.forEach(item => {
+        const itemTotal = item.quantity * item.unit_price;
+        subtotal += itemTotal;
+        const row = `
+          <tr>
+            <td>${item.description}</td>
+            <td class="col-qty">${item.quantity}</td>
+            <td class="col-price">${itemTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+            <td class="col-total">${itemTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</td>
+          </tr>
+        `;
+        itemsTbody.innerHTML += row;
+      });
+
+      document.getElementById('b-subtotal').textContent = subtotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      
+      if (data.discount_percent > 0) {
+        const discVal = subtotal * (data.discount_percent / 100);
+        document.getElementById('row-discount').style.display = 'flex';
+        document.getElementById('b-discount').textContent = `- ${discVal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}`;
+      }
+
+      document.getElementById('b-total').textContent = data.total_amount.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+      if (data.notes) {
+        document.getElementById('notes-container').style.display = 'block';
+        document.getElementById('b-notes').innerHTML = data.notes.replace(/\n/g, '<br>');
+      }
+      
+      document.title = `Orçamento Higher - ${data.clients?.name || 'Cliente'}`;
+    }
+
+    loadBudget();
+  </script>
+</body>
+</html>

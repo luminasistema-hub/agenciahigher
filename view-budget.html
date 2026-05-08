@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Orçamento | Agência Higher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card: #141414;
+      --border: #262626;
+      --text: #ffffff;
+      --text-muted: #a1a1aa;
+      --brand: #FF6B1A;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      padding: 2rem 1rem;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 3rem;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .logo-icon {
+      background: var(--brand);
+      color: white;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+    }
+    .budget-info { text-align: right; }
+    .budget-info h1 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .status-badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-top: 0.5rem;
+    }
+    .status-approved { background: rgba(34, 197, 94, 0.15); color: var(--green); }
+    .status-declined { background: rgba(239, 68, 68, 0.15); color: var(--red); }
+    .status-draft, .status-sent { background: rgba(255, 107, 26, 0.15); color: var(--brand); }
+
+    .client-section { margin-bottom: 3rem; padding: 1.5rem; background: rgba(255,255,255,0.03); border-radius: 16px; }
+    .client-section h2 { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.5rem; }
+    .client-name { font-size: 1.2rem; font-weight: 700; }
+
+    table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    th { text-align: left; padding: 1rem; border-bottom: 2px solid var(--border); color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; }
+    td { padding: 1.2rem 1rem; border-bottom: 1px solid var(--border); }
+    .total-row { font-size: 1.2rem; font-weight: 800; }
+    .total-label { text-align: right; }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+      font-size: 1rem;
+    }
+    .btn-approve { background: var(--green); color: white; box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3); }
+    .btn-approve:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4); }
+    .btn-decline { background: transparent; border: 1px solid var(--border); color: var(--text-muted); }
+    .btn-decline:hover { background: rgba(239, 68, 68, 0.1); color: var(--red); border-color: var(--red); }
+
+    .success-screen {
+      text-align: center;
+      display: none;
+    }
+    .success-icon { font-size: 4rem; margin-bottom: 1rem; }
+
+    @media (max-width: 600px) {
+      .container { padding: 1.5rem; }
+      .header { flex-direction: column; gap: 1rem; align-items: center; text-align: center; }
+      .budget-info { text-align: center; }
+      .actions { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container" id="budget-content">
+    <div class="header">
+      <div class="logo">
+        <div class="logo-icon">H</div>
+        <span>Higher</span>
+      </div>
+      <div class="budget-info">
+        <h1 id="budget-title">Carregando...</h1>
+        <p id="budget-id-display" style="color:var(--text-muted); font-size: 0.8rem"></p>
+        <div id="budget-status" class="status-badge"></div>
+      </div>
+    </div>
+
+    <div class="client-section">
+      <h2>Preparado para</h2>
+      <div class="client-name" id="client-name">...</div>
+      <div id="client-company" style="color:var(--text-muted)">...</div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Descrição</th>
+          <th style="text-align:center">Qtd</th>
+          <th style="text-align:right">Valor</th>
+        </tr>
+      </thead>
+      <tbody id="items-tbody"></tbody>
+      <tfoot>
+        <tr>
+          <td colspan="2" class="total-label" style="padding-top: 2rem; color:var(--text-muted)">Subtotal</td>
+          <td style="text-align:right; padding-top: 2rem" id="subtotal">...</td>
+        </tr>
+        <tr id="discount-row" style="display:none">
+          <td colspan="2" class="total-label" style="color:var(--green)">Desconto</td>
+          <td style="text-align:right; color:var(--green)" id="discount">...</td>
+        </tr>
+        <tr class="total-row">
+          <td colspan="2" class="total-label" style="border-bottom:none">Total do Investimento</td>
+          <td style="text-align:right; color:var(--brand); border-bottom:none" id="total">...</td>
+        </tr>
+      </tfoot>
+    </table>
+
+    <div id="notes-container" style="margin-bottom: 3rem;">
+      <h3 style="font-size:0.9rem; color:var(--text-muted); text-transform:uppercase; margin-bottom:0.5rem">Observações e Termos</h3>
+      <p id="budget-notes" style="color:var(--text-muted); font-size:0.9rem; white-space:pre-wrap"></p>
+    </div>
+
+    <div class="actions" id="action-buttons">
+      <button class="btn btn-decline" onclick="updateStatus('declined')">Recusar Proposta</button>
+      <button class="btn btn-approve" onclick="updateStatus('approved')">Aprovar Orçamento</button>
+    </div>
+
+    <div class="success-screen" id="success-screen">
+      <div class="success-icon">🚀</div>
+      <h2>Orçamento Aprovado!</h2>
+      <p style="color:var(--text-muted); margin-top:1rem">Parabéns! Nosso time entrará em contato em breve para iniciar o projeto.</p>
+    </div>
+    
+    <div class="success-screen" id="declined-screen">
+      <div class="success-icon">🤝</div>
+      <h2>Proposta Recusada</h2>
+      <p style="color:var(--text-muted); margin-top:1rem">Entendemos. Caso queira conversar sobre ajustes, estamos à disposição.</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script>
+    const db = getSupabase();
+    const urlParams = new URLSearchParams(window.location.search);
+    const budgetId = urlParams.get('id');
+
+    async function loadBudget() {
+      if (!budgetId) return;
+
+      const { data: b, error } = await db
+        .from('budgets')
+        .select('*, clients(*)')
+        .eq('id', budgetId)
+        .single();
+
+      if (error || !b) {
+        document.body.innerHTML = '<div style="text-align:center; padding:5rem"><h1>Orçamento não encontrado</h1><p>Verifique o link ou entre em contato com a agência.</p></div>';
+        return;
+      }
+
+      document.title = `${b.title} | Agência Higher`;
+      document.getElementById('budget-title').textContent = b.title;
+      document.getElementById('budget-id-display').textContent = `ORÇAMENTO #${b.id.toString().slice(-4).toUpperCase()}`;
+      
+      const statusEl = document.getElementById('budget-status');
+      statusEl.textContent = getStatusLabel(b.status);
+      statusEl.className = `status-badge status-${b.status}`;
+
+      document.getElementById('client-name').textContent = b.clients?.name || 'Cliente';
+      document.getElementById('client-company').textContent = b.clients?.company || '';
+      document.getElementById('budget-notes').textContent = b.notes || 'Nenhuma observação adicional.';
+
+      const subtotal = b.items.reduce((acc, it) => acc + (it.quantity * it.unit_price), 0);
+      const discountVal = subtotal * (b.discount_percent / 100);
+
+      document.getElementById('items-tbody').innerHTML = b.items.map(it => `
+        <tr>
+          <td>${it.description}</td>
+          <td style="text-align:center">${it.quantity}</td>
+          <td style="text-align:right">${formatCurrency(it.unit_price)}</td>
+        </tr>
+      `).join('');
+
+      document.getElementById('subtotal').textContent = formatCurrency(subtotal);
+      if (discountVal > 0) {
+        document.getElementById('discount-row').style.display = 'table-row';
+        document.getElementById('discount').textContent = `- ${formatCurrency(discountVal)}`;
+      }
+      document.getElementById('total').textContent = formatCurrency(b.total_amount);
+
+      // Hide actions if already decided
+      if (b.status === 'approved' || b.status === 'declined') {
+        document.getElementById('action-buttons').style.display = 'none';
+        if (b.status === 'approved') document.getElementById('success-screen').style.display = 'block';
+        if (b.status === 'declined') document.getElementById('declined-screen').style.display = 'block';
+      }
+    }
+
+    async function updateStatus(newStatus) {
+      const confirmMsg = newStatus === 'approved' 
+        ? 'Deseja aprovar este orçamento e iniciar o projeto?' 
+        : 'Deseja recusar esta proposta?';
+      
+      if (!confirm(confirmMsg)) return;
+
+      const { error } = await db
+        .from('budgets')
+        .update({ status: newStatus })
+        .eq('id', budgetId);
+
+      if (error) {
+        alert('Erro ao processar. Tente novamente ou fale com seu consultor.');
+      } else {
+        location.reload();
+      }
+    }
+
+    function formatCurrency(v) {
+      return 'R$ ' + (Number(v || 0)).toLocaleString('pt-BR', { minimumFractionDigits: 2 });
+    }
+
+    function getStatusLabel(s) {
+      return { draft: 'Rascunho', sent: 'Aguardando Aprovação', approved: 'Aprovado', declined: 'Recusado' }[s] || s;
+    }
+
+    loadBudget();
+  </script>
+</body>
+</html>

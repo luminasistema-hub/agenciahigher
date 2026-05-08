@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Digital | Agência Higher</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet" />
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="quiz.css" />
+</head>
+<body>
+
+  <!-- QUIZ NAV -->
+  <nav class="quiz-nav">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-icon">H</div>
+      <span>Higher</span>
+    </a>
+    <div class="quiz-nav-center">
+      <div class="progress-bar">
+        <div id="quiz-progress" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    <span id="quiz-step-indicator" class="quiz-step-label">Passo 1 de 5</span>
+  </nav>
+
+  <!-- QUIZ CONTAINER -->
+  <main class="quiz-wrapper">
+    <div id="quiz-screens" style="width: 100%;">
+      
+      <!-- SCREEN: INTRO -->
+      <section id="screen-intro" class="quiz-screen active">
+        <div class="intro-content">
+          <div class="intro-badge">DIAGNÓSTICO GRATUITO</div>
+          <h1 class="intro-title">Qual projeto digital vai <span class="gradient-text">transformar</span> seu negócio?</h1>
+          <p class="intro-subtitle">Responda 5 perguntas rápidas e descubra qual solução a Higher vai construir sob medida para você — sem compromisso.</p>
+          <div class="intro-features">
+            <div class="intro-feature">✦ 100% Gratuito</div>
+            <div class="intro-feature">🎯 Projeto Sob Medida</div>
+            <div class="intro-feature">⚡ Resultado em 60s</div>
+          </div>
+          <button class="btn btn-primary btn-xl" onclick="startQuiz()">
+            Iniciar Diagnóstico Agora 🚀
+          </button>
+          <p class="intro-disclaimer">Sem compromisso. Sem spam. Só clareza.</p>
+        </div>
+        <div class="intro-visual">
+          <div class="visual-ring ring-1"></div>
+          <div class="visual-ring ring-2"></div>
+          <div class="visual-ring ring-3"></div>
+        </div>
+      </section>
+
+
+      <!-- SCREEN: QUESTIONS -->
+      <section id="screen-questions" class="quiz-screen">
+        <div class="q-shell">
+          <div class="q-header">
+            <div class="q-meta">
+              <span class="q-num" id="q-num">01</span>
+              <span class="q-category" id="q-category">Diagnóstico</span>
+            </div>
+            <h2 class="q-title" id="question-text">Pergunta aqui?</h2>
+            <p class="q-hint" id="q-hint"></p>
+          </div>
+          <div id="options-grid" class="options-grid">
+            <!-- Options injected by JS -->
+          </div>
+          <div class="q-footer">
+            <div class="q-dots" id="q-dots"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREEN: LEAD FORM -->
+      <section id="screen-lead" class="quiz-screen">
+        <div class="lead-step">
+          <div class="lead-badge">QUASE LÁ</div>
+          <h2 class="lead-title">Onde devemos enviar seu diagnóstico?</h2>
+          <p class="lead-subtitle">Seus resultados estão prontos. Informe seus dados para acessar as recomendações exclusivas.</p>
+          
+          <form id="quiz-lead-form" class="lead-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lead-name">Seu Nome</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="lead-name" placeholder="Como podemos te chamar?" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lead-whatsapp">WhatsApp</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📱</span>
+                  <input type="tel" id="lead-whatsapp" placeholder="(00) 00000-0000" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="lead-email">E-mail Corporativo</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📧</span>
+                  <input type="email" id="lead-email" placeholder="seu@email.com" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="lead-doc">CPF ou CNPJ</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🏢</span>
+                  <input type="text" id="lead-doc" placeholder="000.000.000-00" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="lead-details">Qual o seu principal objetivo ou necessidade atual?</label>
+              <div class="input-wrapper">
+                <span class="input-icon icon-textarea">🎯</span>
+                <textarea id="lead-details" placeholder="Ex: Queremos escalar nossas vendas no digital e estruturar um funil..." required></textarea>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit-lead" id="btn-submit-quiz">Gerar Meu Diagnóstico Agora 🚀</button>
+            <p class="lead-privacy">🔒 Respeitamos sua privacidade. Seus dados estão 100% seguros.</p>
+          </form>
+        </div>
+      </section>
+
+      <!-- SCREEN: RESULT -->
+      <section id="screen-result" class="quiz-screen">
+        <div class="result-content">
+          <div id="result-badge" class="result-badge">INDICAÇÃO: STARTER</div>
+          <h2 id="result-title" class="intro-title">Sua empresa está pronta para o próximo nível!</h2>
+          <div id="result-description" class="result-description">
+            <!-- Content injected by JS -->
+          </div>
+          
+          <div class="result-actions">
+            <a href="#" id="result-cta-btn" class="btn btn-primary btn-xl">
+              Falar com Especialista no WhatsApp
+            </a>
+            <button class="btn btn-outline" onclick="location.reload()">Refazer Teste</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- LOADING OVERLAY -->
+  <div id="quiz-loading" class="loading-overlay" style="display: none;">
+    <div class="spinner"></div>
+    <p>Processando seu perfil...</p>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-client.js"></script>
+  <script src="quiz.js?v=2.0.1"></script>
+</body>
+</html>
