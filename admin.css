@@ -85,9 +85,22 @@ input, select, textarea, button { font-family: inherit; }
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
-.logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
-.logo-sub { font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 2px; }
-.logo-main { height: 1.8rem; width: auto; display: block; margin: 0; }
+.logo-wrap { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: 45px;
+}
+.logo-main { 
+  height: 90px; 
+  width: auto; 
+  display: block; 
+  margin-top: 28px; /* Esconde o "agência" que está no topo da imagem */
+  object-fit: contain;
+  flex-shrink: 0;
+}
 
 .logo-text { color: var(--text-1); }
 

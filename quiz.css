@@ -130,9 +130,22 @@ body::before {
   text-transform: uppercase;
 }
 
-.logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
-.logo-sub { font-family: 'Outfit', sans-serif; font-size: 0.65rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 2px; }
-.logo-main { height: 2.2rem; width: auto; display: block; margin: 0; }
+.logo-wrap { 
+  display: flex; 
+  flex-direction: column; 
+  overflow: hidden;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+}
+.logo-main { 
+  height: 80px; 
+  width: auto; 
+  display: block; 
+  margin-top: 26px; 
+  object-fit: contain;
+  flex-shrink: 0;
+}
 
 .nav-back {
   font-size: 0.85rem;

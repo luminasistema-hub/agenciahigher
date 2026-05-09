@@ -54,9 +54,22 @@ body {
 }
 .nav-container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--text-primary); }
-.logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
-.logo-sub { font-family: var(--font-display); font-size: 0.8rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 2px; }
-.logo-main { height: 2.2rem; width: auto; display: block; margin: 0; }
+.logo-wrap { 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+}
+.logo-main { 
+    height: 80px; 
+    width: auto; 
+    display: block; 
+    margin-top: 26px; 
+    object-fit: contain;
+    flex-shrink: 0;
+}
 .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
 .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.3s ease; position: relative; }
 .nav-links a:hover { color: var(--text-primary); }
