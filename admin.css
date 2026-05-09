@@ -102,6 +102,9 @@ input, select, textarea, button { font-family: inherit; }
   flex-shrink: 0;
 }
 
+.login-logo { margin-bottom: 1rem; padding: 1.5rem 0; display: flex; justify-content: center; }
+.sidebar-logo { padding: 1.5rem 0.5rem; border-bottom: 1px solid var(--border); margin-bottom: 1rem; }
+
 .logo-text { color: var(--text-1); }
 
 .login-title {

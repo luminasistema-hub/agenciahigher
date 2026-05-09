@@ -129,6 +129,7 @@ body::before {
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
+.nav-logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; padding: 1.5rem 0; }
 
 .logo-wrap { 
   display: flex; 
