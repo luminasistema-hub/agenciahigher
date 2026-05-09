@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Outfit:wght@600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #FC5130;
+      --primary: #bce769;
       --text: #1A1A1A;
       --text-light: #666;
       --border: #EEE;
@@ -20,8 +20,9 @@
     
     header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 3rem; border-bottom: 2px solid var(--primary); padding-bottom: 2rem; }
     .logo-box { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-icon { background: var(--primary); color: white; width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: 'Outfit'; font-size: 1.5rem; }
-    .logo-text { font-family: 'Outfit'; font-size: 1.5rem; font-weight: 700; }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
+    .logo-sub { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; color: #1A1A1A; text-transform: lowercase; margin-left: 2px; }
+    .logo-main { height: 1.8rem; width: auto; display: block; margin: 0; }
     
     .budget-info { text-align: right; }
     .budget-info h1 { font-family: 'Outfit'; font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
@@ -66,8 +67,9 @@
   <div class="container" id="budget-content">
     <header>
       <div class="logo-box">
-        <div class="logo-icon">H</div>
-        <span class="logo-text">Higher</span>
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Higher" class="logo-main">
+        </div>
       </div>
       <div class="budget-info">
         <h1>ORÇAMENTO</h1>

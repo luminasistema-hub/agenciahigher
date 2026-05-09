@@ -5,8 +5,8 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --brand-orange: #FC5130;
-  --brand-orange-dim: rgba(252, 81, 48, 0.15);
+  --brand-orange: #bce769;
+  --brand-orange-dim: rgba(188, 231, 105, 0.15);
   --brand-purple: #050401;
   --brand-purple-dim: rgba(5, 4, 1, 0.12);
   --brand-green: #22C55E;
@@ -32,12 +32,12 @@
   --radius-sm: 8px;
   --trans: 0.25s ease;
 
-  --grad-brand: linear-gradient(135deg, #FC5130 0%, #050401 100%);
-  --grad-cta: linear-gradient(135deg, #FC5130, #D13A1D);
+  --grad-brand: linear-gradient(135deg, #bce769 0%, #050401 100%);
+  --grad-cta: linear-gradient(135deg, #bce769, #a3cb5b);
 
   --priority-low: #22C55E;
   --priority-medium: #F59E0B;
-  --priority-high: #FC5130;
+  --priority-high: #bce769;
   --priority-urgent: #EF4444;
 }
 
@@ -70,8 +70,8 @@ input, select, textarea, button { font-family: inherit; }
 .login-glow {
   position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse 50% 40% at 30% 40%, rgba(252, 81, 48, 0.1), transparent 60%),
-    radial-gradient(ellipse 40% 30% at 70% 70%, rgba(255,107,26,0.08), transparent 60%);
+    radial-gradient(ellipse 50% 40% at 30% 40%, rgba(188, 231, 105, 0.1), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 70% 70%, rgba(188, 231, 105, 0.08), transparent 60%);
   pointer-events: none;
 }
 
@@ -85,20 +85,9 @@ input, select, textarea, button { font-family: inherit; }
   box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 
-.login-logo {
-  display: flex; align-items: center; gap: 0.6rem;
-  font-family: 'Outfit', sans-serif;
-  font-weight: 800; font-size: 1.4rem;
-  margin-bottom: 1.5rem;
-}
-
-.logo-icon {
-  width: 34px; height: 34px;
-  background: var(--grad-brand);
-  border-radius: 9px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.9rem; font-weight: 900; color: #fff;
-}
+.logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
+.logo-sub { font-family: 'Outfit', sans-serif; font-size: 0.6rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 2px; }
+.logo-main { height: 1.8rem; width: auto; display: block; margin: 0; }
 
 .logo-text { color: var(--text-1); }
 
@@ -133,7 +122,7 @@ input, select, textarea, button { font-family: inherit; }
 .field-group select:focus,
 .field-group textarea:focus {
   border-color: var(--brand-purple);
-  box-shadow: 0 0 0 3px rgba(252, 81, 48, 0.15);
+  box-shadow: 0 0 0 3px rgba(188, 231, 105, 0.15);
 }
 .field-group input::placeholder,
 .field-group textarea::placeholder { color: var(--text-3); }
@@ -157,16 +146,16 @@ input, select, textarea, button { font-family: inherit; }
 .btn-login {
   width: 100%;
   background: var(--grad-cta);
-  color: #fff;
+  color: #050401;
   font-family: 'Outfit', sans-serif;
   font-weight: 700; font-size: 1rem;
   padding: 0.85rem;
   border: none; border-radius: var(--radius-sm);
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(255,107,26,0.35);
+  box-shadow: 0 4px 20px rgba(188, 231, 105, 0.35);
   transition: var(--trans);
 }
-.btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,26,0.5); }
+.btn-login:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(188, 231, 105, 0.5); }
 .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
 /* ============================================================
@@ -341,14 +330,14 @@ input, select, textarea, button { font-family: inherit; }
    BUTTONS
    ============================================================ */
 .btn-primary {
-  background: var(--grad-cta); color: #fff;
+  background: var(--grad-cta); color: #050401;
   font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 0.85rem;
   padding: 0.6rem 1.25rem; border: none;
   border-radius: var(--radius-sm); cursor: pointer;
   transition: var(--trans); white-space: nowrap;
-  box-shadow: 0 3px 12px rgba(255,107,26,0.3);
+  box-shadow: 0 3px 12px rgba(188, 231, 105, 0.3);
 }
-.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(255,107,26,0.45); }
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(188, 231, 105, 0.45); }
 .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
 .btn-ghost {

@@ -14,8 +14,8 @@
       --bg-deep: #050505;
       --bg-surface: #111111;
       --bg-card: rgba(255, 255, 255, 0.03);
-      --brand-orange: #FF6B1A;
-      --brand-orange-glow: rgba(252, 81, 48, 0.3);
+      --brand-orange: #bce769;
+      --brand-orange-glow: rgba(188, 231, 105, 0.3);
       --text-main: #FFFFFF;
       --text-dim: #8E8D8C;
       --border: rgba(255, 255, 255, 0.08);
@@ -60,12 +60,9 @@
     }
 
     .logo-area { margin-bottom: 4rem; display: flex; align-items: center; gap: 0.8rem; }
-    .logo-mark { 
-      width: 32px; height: 32px; background: var(--brand-orange); 
-      border-radius: 8px; display: flex; align-items: center; justify-content: center;
-      font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;
-    }
-    .logo-text { font-family: var(--font-display); font-weight: 700; letter-spacing: 2px; font-size: 1.2rem; }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
+    .logo-sub { font-family: var(--font-display); font-size: 0.6rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 1px; }
+    .logo-main { height: 1.8rem; width: auto; display: block; margin: 0; }
 
     .nav-menu { flex: 1; list-style: none; }
     .nav-item { 
@@ -142,7 +139,7 @@
     }
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--brand-orange), #FF8A65);
+      background: linear-gradient(90deg, var(--brand-orange), #d4f28d);
       box-shadow: 0 0 20px var(--brand-orange-glow);
       border-radius: 10px;
       transition: width 1s ease-out;
@@ -248,8 +245,9 @@
   <div id="portal-login" class="login-wrapper">
     <div class="login-card">
       <div class="logo-area" style="justify-content: center; margin-bottom: 2rem;">
-        <div class="logo-mark">H</div>
-        <span class="logo-text">HIGHER</span>
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Higher" class="logo-main">
+        </div>
       </div>
       <h2 id="login-title" style="font-size: 1.5rem; margin-bottom: 0.5rem;">Central do Cliente</h2>
       <p id="login-step-desc" class="subtitle" style="margin-bottom: 2.5rem;">Acesse seus projetos, faturas e materiais exclusivos.</p>
@@ -302,8 +300,9 @@
   <div id="portal-app" class="app-container" style="display: none;">
     <aside class="sidebar">
       <div class="logo-area">
-        <div class="logo-mark">H</div>
-        <span class="logo-text">HIGHER</span>
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Higher" class="logo-main">
+        </div>
       </div>
       
       <nav class="nav-menu">

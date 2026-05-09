@@ -14,7 +14,7 @@
       --border: #262626;
       --text: #ffffff;
       --text-muted: #a1a1aa;
-      --brand: #FF6B1A;
+      --brand: #bce769;
       --green: #22c55e;
       --red: #ef4444;
     }
@@ -49,16 +49,9 @@
       align-items: center;
       gap: 0.8rem;
     }
-    .logo-icon {
-      background: var(--brand);
-      color: white;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-    }
+    .logo-wrap { display: flex; flex-direction: column; line-height: 0.8; }
+    .logo-sub { font-family: 'Outfit', sans-serif; font-size: 0.7rem; font-weight: 700; color: white; text-transform: lowercase; margin-left: 2px; }
+    .logo-main { height: 2rem; width: auto; display: block; margin: 0; }
     .budget-info { text-align: right; }
     .budget-info h1 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
     .status-badge {
@@ -125,8 +118,9 @@
   <div class="container" id="budget-content">
     <div class="header">
       <div class="logo">
-        <div class="logo-icon">H</div>
-        <span>Higher</span>
+        <div class="logo-wrap">
+          <img src="logo.png" alt="Higher" class="logo-main">
+        </div>
       </div>
       <div class="budget-info">
         <h1 id="budget-title">Carregando...</h1>

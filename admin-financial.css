@@ -17,7 +17,7 @@
 #stat-received:hover { border-color: rgba(34,197,94,0.4);   box-shadow: 0 0 18px rgba(34,197,94,0.12); }
 #stat-pending:hover  { border-color: rgba(245,158,11,0.4);  box-shadow: 0 0 18px rgba(245,158,11,0.12); }
 #stat-overdue:hover  { border-color: rgba(239,68,68,0.4);   box-shadow: 0 0 18px rgba(239,68,68,0.12); }
-#stat-mrr:hover      { border-color: rgba(252, 81, 48, 0.4);  box-shadow: 0 0 18px rgba(252, 81, 48, 0.12); }
+#stat-mrr:hover      { border-color: rgba(188, 231, 105, 0.4);  box-shadow: 0 0 18px rgba(188, 231, 105, 0.12); }
 
 .financial-container {
   display: flex; flex-direction: column; gap: 2rem;
@@ -67,7 +67,7 @@
   transition: all .2s;
 }
 .item-row-input:hover { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.2); }
-.item-row-input:focus { border-color: var(--brand-orange); background: rgba(252, 81, 48, 0.05); box-shadow: 0 0 0 2px rgba(252, 81, 48, 0.2); }
+.item-row-input:focus { border-color: var(--brand-orange); background: rgba(188, 231, 105, 0.05); box-shadow: 0 0 0 2px rgba(188, 231, 105, 0.2); }
 .item-row-input[type="number"] { text-align: right; }
 
 .item-row-total { font-weight: 700; color: var(--brand-orange); text-align: right; padding-top: 0.8rem !important; }
@@ -79,7 +79,7 @@
 .remove-item-btn:hover { color: #fff; background: #ef4444; }
 
 .add-item-btn {
-  background: rgba(252, 81, 48, 0.05); border: 1px dashed rgba(252, 81, 48, 0.4);
+  background: rgba(188, 231, 105, 0.05); border: 1px dashed rgba(188, 231, 105, 0.4);
   color: var(--brand-orange); font-size: 0.85rem; font-weight: 600;
   padding: 0.8rem 1rem; border-radius: 8px;
   cursor: pointer; width: 100%; margin-top: 0.75rem;
@@ -141,7 +141,7 @@
 }
 .inv-preview-logo-icon {
   width: 32px; height: 32px; border-radius: 8px;
-  background: linear-gradient(135deg, #FC5130, #D13A1D);
+  background: linear-gradient(135deg, #bce769, #a3cb5b);
   display: flex; align-items: center; justify-content: center;
   font-weight: 900; font-size: 0.85rem;
 }

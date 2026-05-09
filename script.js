@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- 3. HERO PARTICLES ---- */
   const particlesContainer = document.getElementById('hero-particles');
-  const particleColors = ['#FC5130', '#050401', '#FFFAFF', '#FF7B60', '#D13A1D', '#151413'];
+  const particleColors = ['#bce769', '#050401', '#FFFAFF', '#d4f28d', '#a3cb5b', '#151413'];
   const PARTICLE_COUNT = 40;
 
   const createParticle = () => {
@@ -263,7 +263,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = card.getBoundingClientRect();
       const x = ((e.clientX - rect.left) / rect.width) * 100;
       const y = ((e.clientY - rect.top) / rect.height) * 100;
-      card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(252, 81, 48, 0.12), #151413 60%)`;
+      card.style.background = `radial-gradient(circle at ${x}% ${y}%, rgba(188, 231, 105, 0.12), #151413 60%)`;
     });
     card.addEventListener('mouseleave', () => {
       card.style.background = '';
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
   style.textContent = `
     @keyframes btn-pulse {
       0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.04); box-shadow: 0 15px 50px rgba(252, 81, 48, 0.4); }
+      50% { transform: scale(1.04); box-shadow: 0 15px 50px rgba(188, 231, 105, 0.4); }
     }
     .nav-link.active { color: #fff !important; }
   `;
@@ -395,5 +395,5 @@ document.getElementById('checkout-form')?.addEventListener('submit', async (e) =
   });
   resetIdle();
 
-  console.log('%c🚀 Agência Higher — Site carregado com sucesso!', 'color:#FF6B1A;font-weight:700;font-size:14px;');
+  console.log('%c🚀 Agência Higher — Site carregado com sucesso!', 'color:#bce769;font-weight:700;font-size:14px;');
 });
