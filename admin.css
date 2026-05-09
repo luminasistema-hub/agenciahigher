@@ -91,13 +91,13 @@ input, select, textarea, button { font-family: inherit; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  height: 42px; /* Altura exata para o nome 'Higher' */
+  height: 60px; /* Espaço maior para a logo */
 }
 .logo-main { 
   height: auto; 
-  width: 150px; /* Um pouco maior para melhor leitura */
+  width: 210px; /* Logo maior */
   display: block; 
-  margin-top: -20px; /* Puxa a imagem para CIMA, escondendo o 'agência' que está no topo */
+  margin-top: -28px; /* Ajuste proporcional para manter o corte */
   object-fit: contain;
   flex-shrink: 0;
 }

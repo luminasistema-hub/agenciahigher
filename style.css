@@ -58,15 +58,15 @@ body {
     display: flex; 
     flex-direction: column; 
     overflow: hidden; 
-    height: 32px;
+    height: 40px;
     align-items: center;
     justify-content: center;
 }
 .logo-main { 
     height: auto; 
-    width: 110px; 
+    width: 140px; 
     display: block; 
-    margin-top: -14px; 
+    margin-top: -18px; 
     object-fit: contain;
     flex-shrink: 0;
 }
