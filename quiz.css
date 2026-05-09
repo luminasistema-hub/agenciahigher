@@ -134,15 +134,15 @@ body::before {
   display: flex; 
   flex-direction: column; 
   overflow: hidden;
-  height: 40px;
+  height: 42px;
   align-items: center;
   justify-content: center;
 }
 .logo-main { 
-  height: 80px; 
-  width: auto; 
+  height: auto; 
+  width: 130px; 
   display: block; 
-  margin-top: 26px; 
+  margin-top: 30px; 
   object-fit: contain;
   flex-shrink: 0;
 }
