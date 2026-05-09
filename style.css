@@ -57,16 +57,13 @@ body {
 .logo-wrap { 
     display: flex; 
     flex-direction: column; 
-    overflow: hidden; 
-    height: 40px;
     align-items: center;
     justify-content: center;
 }
 .logo-main { 
-    height: auto; 
-    width: 140px; 
+    height: 2.5rem; 
+    width: auto; 
     display: block; 
-    margin-top: -18px; 
     object-fit: contain;
     flex-shrink: 0;
 }

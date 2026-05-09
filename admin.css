@@ -90,14 +90,11 @@ input, select, textarea, button { font-family: inherit; }
   flex-direction: column; 
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  height: 60px; /* Espaço maior para a logo */
 }
 .logo-main { 
-  height: auto; 
-  width: 210px; /* Logo maior */
+  height: 3.5rem; /* Altura generosa para mostrar toda a logo (agência + Higher) */
+  width: auto; 
   display: block; 
-  margin-top: -28px; /* Ajuste proporcional para manter o corte */
   object-fit: contain;
   flex-shrink: 0;
 }
